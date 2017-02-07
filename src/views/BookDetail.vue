@@ -9,7 +9,14 @@
           <li>ISBN:123454786</li>
           <li>出版社: 新华出版社</li>
           <li>出版日期: 2016-06</li>
-          <li>主人: 李焕</li>
+          <li >
+            <span class="userName">
+              主人:
+            </span>
+            <router-link to="/user?id=123">
+              <mu-avatar :src="avatar" :size="30"/>
+          </router-link>
+        </li>
         </ul>
       </div>
       <p>简介:小王子作者圣埃克苏佩里的最后遗作</p>
@@ -23,8 +30,14 @@
 import CommentList from '../components/CommentList'
 import BackNav from '../components/BackNav'
 import { mapState } from 'vuex'
+import Avatar from '../assets/cover/3.jpg'
 
 export default {
+  data () {
+    return {
+      avatar: Avatar
+    }
+  },
   mounted () {
     this.$store.dispatch('hiddenNavBar')
   },
@@ -52,5 +65,10 @@ img{
 }
 .comment {
   margin-bottom: 56px;
+}
+.userName {
+  position: relative;
+  bottom: 10px;
+  padding-right: 5px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <mu-appbar title="返回" >
     <mu-icon-button icon='arrow_back' slot="left" @click="goBack"/>
-    <mu-icon-button icon='share' slot="right"/>
+    <!-- <mu-icon-button icon='share' slot="right"/> -->
   </mu-appbar>
 </template>
 

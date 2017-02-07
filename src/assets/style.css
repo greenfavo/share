@@ -42,7 +42,7 @@ li {
   margin-top: 20px;
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease-in
+  transition: opacity .5s linear
 }
 .fade-enter, .fade-leave-active {
   opacity: 0
