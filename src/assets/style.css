@@ -1,0 +1,54 @@
+html, #app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  font-family: '微软雅黑'!important;
+}
+
+.main {
+  padding: 0 15px;
+  margin-bottom: 56px;
+  position:relative;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+/*浅灰色文字*/
+.light{
+  color: gray;
+}
+.cover {
+  width: 100px;
+  height: 100%;
+}
+a {
+  cursor: pointer;
+}
+li {
+  margin-bottom: 5px;
+}
+.mT20{
+  margin-top: 20px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease-in
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+.bottom {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
