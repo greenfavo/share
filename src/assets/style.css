@@ -41,6 +41,9 @@ li {
 .mT20{
   margin-top: 20px;
 }
+.mR20 {
+  margin-right: 20px;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s linear
 }

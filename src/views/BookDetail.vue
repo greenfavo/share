@@ -20,8 +20,8 @@
         </ul>
       </div>
       <p>简介:小王子作者圣埃克苏佩里的最后遗作</p>
+      <mu-raised-button label="借阅"  primary fullWidth/>
     </div>
-    <mu-raised-button label="借阅"  primary fullWidth/>
     <comment-list class="comment"></comment-list>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('hiddenNavBar')
+    this.$store.dispatch('set_back_title', '要塞')
   },
   components: {
     CommentList,

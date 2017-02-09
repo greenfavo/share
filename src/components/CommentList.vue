@@ -6,7 +6,7 @@
       <mu-text-field hintText="说点什么..."/>
       <mu-icon-button icon="send" slot="right"></mu-icon-button>
     </mu-list-item>
-    <mu-list-item :title="item.name" v-for="item in comments">
+    <mu-list-item :title="item.name" v-for="item in comments" afterText="2017-01-22">
       <mu-avatar :src="item.avatar" slot="leftAvatar"/>
       <span slot="describe">
         {{item.content}}
