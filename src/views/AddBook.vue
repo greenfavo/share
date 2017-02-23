@@ -10,12 +10,13 @@
       <span class="mR20 light">封面</span>
       <Upload/>
     </div>
-    <mu-raised-button label="确定" primary fullWidth/>
+    <mu-raised-button label="确定" primary fullWidth @click="handleAdd()"/>
   </div>
 </template>
 
 <script type="text/javascript">
 import Upload from '../components/Upload'
+import api from '../api/index'
 
 export default {
   mounted () {
@@ -24,6 +25,21 @@ export default {
   },
   components: {
     Upload
+  },
+  methods: {
+    handleAdd () {
+      let opts = {
+        ISBN: '123456',
+        name: '呐喊',
+        author: '鲁迅',
+        publish: '春风文艺出版社',
+        publish_date: '2010-11-30',
+        summary: '鲁迅经典之作'
+      }
+      api.addBook(opts).then((res) => {
+        console.log(res)
+      })
+    }
   }
 }
 </script>
