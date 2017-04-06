@@ -1,5 +1,5 @@
 <template>
-  <div class="gridlist-demo-container mT20">
+  <div class="gridlist-demo-container">
     <mu-grid-list class="gridlist-demo">
       <!-- <mu-sub-header>图片展示</mu-sub-header> -->
       <mu-grid-tile v-for="tile in list">
@@ -49,5 +49,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+img {
+  width: 200px;
+  height: 200px;
 }
 </style>
