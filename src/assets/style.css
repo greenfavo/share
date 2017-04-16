@@ -45,7 +45,7 @@ li {
   margin-right: 20px;
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s linear
+  transition: opacity .3s linear
 }
 .fade-enter, .fade-leave-active {
   opacity: 0
@@ -54,4 +54,14 @@ li {
   width: 100%;
   position: fixed;
   bottom: 0;
+}
+.subHeader{
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+}
+.bookSec {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }

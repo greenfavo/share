@@ -31,6 +31,9 @@ import PersonCover from '../components/PersonCover'
 export default {
   components: {
     PersonCover
+  },
+  mounted () {
+    this.$store.commit('SHOW_NAVBAR')
   }
 }
 </script>

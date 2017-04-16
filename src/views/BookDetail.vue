@@ -39,8 +39,8 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('hiddenNavBar')
-    this.$store.dispatch('set_back_title', '要塞')
+    this.$store.commit('HIDDEN_NAVBAR')
+    this.$store.commit('SET_BACK_TITLE', '要塞')
   },
   components: {
     CommentList,

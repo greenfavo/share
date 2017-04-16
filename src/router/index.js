@@ -6,11 +6,13 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      name: 'explore',
       path: '/explore',
       alias: '/',
       component: resolve => require(['../views/Explore'], resolve)
     },
     {
+      name: 'shelf',
       path: '/shelf',
       component: resolve => require(['../views/Shelf'], resolve)
     },
@@ -19,6 +21,7 @@ export default new Router({
       component: resolve => require(['../views/BookDetail'], resolve)
     },
     {
+      name: 'mine',
       path: '/mine',
       component: resolve => require(['../views/Mine'], resolve)
     },
@@ -33,6 +36,10 @@ export default new Router({
     {
       path: '/addBook',
       component: resolve => require(['../views/AddBook'], resolve)
+    },
+    {
+      path: '/search',
+      component: resolve => require(['../views/Search'], resolve)
     }
   ]
 })

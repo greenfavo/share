@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('showNavBar')
+    this.$store.commit('SHOW_NAVBAR')
     this.trigger = this.$refs.button.$el
   },
   methods: {

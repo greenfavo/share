@@ -1,9 +1,6 @@
 <template>
-  <div >
-    <p class="subHeader">
-      <span>推荐</span>
-      <span>更多></span>
-    </p>
+  <div class="main">
+    <p>共找到4条和<strong>{{this.searchTxt}}</strong>相关的图书</p>
     <section  v-for="n in 4">
       <router-link to="/book?id=1" class="bookSec" tag="div">
         <img src="../assets/cover/2.jpg" class="cover" />
@@ -17,7 +14,16 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 export default {
+  data () {
+    return {
+      searchTxt: this.$route.query.searchTxt || ''
+    }
+  },
+  mounted () {
+    this.$store.commit('HIDDEN_NAVBAR')
+    this.$store.commit('SET_BACK_TITLE', '搜索')
+  }
 }
 </script>

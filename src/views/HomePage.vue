@@ -18,8 +18,8 @@ export default {
     BookGrid
   },
   mounted () {
-    this.$store.dispatch('hiddenNavBar')
-    this.$store.dispatch('set_back_title', '小书童')
+    this.$store.commit('HIDDEN_NAVBAR')
+    this.$store.commit('SET_BACK_TITLE', '小书童')
   }
 }
 </script>

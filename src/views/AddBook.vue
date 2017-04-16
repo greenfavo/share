@@ -20,8 +20,8 @@ import api from '../api/index'
 
 export default {
   mounted () {
-    this.$store.dispatch('hiddenNavBar')
-    this.$store.dispatch('set_back_title', '添加图书')
+    this.$store.commit('HIDDEN_NAVBAR')
+    this.$store.commit('SET_BACK_TITLE', '添加图书')
   },
   components: {
     Upload

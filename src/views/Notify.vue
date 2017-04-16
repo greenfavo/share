@@ -9,7 +9,7 @@
         </div>
       </mu-list-item>
       <mu-divider />
-      
+
     </mu-list>
     <mu-list>
       <mu-sub-header>系统通知</mu-sub-header>
@@ -33,8 +33,8 @@ import Avatar from '../assets/cover/3.jpg'
 
 export default {
   mounted () {
-    this.$store.dispatch('hiddenNavBar')
-    this.$store.dispatch('set_back_title', '新消息')
+    this.$store.commit('HIDDEN_NAVBAR')
+    this.$store.commit('SET_BACK_TITLE', '新消息')
   },
   data () {
     return {
