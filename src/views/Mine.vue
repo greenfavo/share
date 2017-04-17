@@ -1,6 +1,8 @@
 <template>
   <div class="wrap">
-    <person-cover />
+    <person-cover
+      :nickname="userInfo.nickname"
+      :avatar="userInfo.headimgurl"/>
     <mu-list>
       <mu-sub-header>消息通知</mu-sub-header>
       <mu-list-item title="系统通知">
@@ -25,12 +27,19 @@
 import PersonCover from '../components/PersonCover'
 
 export default {
+  data () {
+    return {
+      userInfo: {}
+    }
+  },
   components: {
     PersonCover
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    this.$store.dispatch('getUserInfo')
+    this.$store.dispatch('getUserInfo').then(() => {
+      this.userInfo = this.$store.state.userInfo
+    })
   }
 }
 </script>

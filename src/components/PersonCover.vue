@@ -4,19 +4,16 @@
     <mu-flat-button label="信用积分:100" icon="navigate_next" labelPosition="before" class="score" />
     <div class="avatar">
       <mu-avatar :src="avatar" :size="60"/>
-      <span>小书童</span>
+      <span>{{nickname}}</span>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import Avatar from '../assets/cover/1.jpg'
-
 export default {
-  data () {
-    return {
-      avatar: Avatar
-    }
+  props: {
+    nickname: String,
+    avatar: String
   }
 }
 </script>
