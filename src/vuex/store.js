@@ -28,6 +28,7 @@ const mutations = {
 const actions = {
   getUserInfo ({ commit }) {
     api.getUserInfo().then((res) => {
+      res = res.data
       if (res.result === 'ok') {
         commit('GET_USER_INFO', res.data)
       } else {
