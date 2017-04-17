@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import api from '../api'
 
 Vue.use(Vuex)
 
 const state = {
   isShowNavBar: true, // 是否显示导航栏
-  backTitle: '返回' // 后退按钮标题
+  backTitle: '返回', // 后退按钮标题
+  userInfo: {}
 }
 
 const mutations = {
@@ -17,18 +19,18 @@ const mutations = {
   },
   SET_BACK_TITLE (state, title) {
     state.backTitle = title
+  },
+  GET_USER_INFO (state, userInfo) {
+    state.userInfo = userInfo
   }
 }
 
 const actions = {
-  showNavBar ({ commit }) {
-    commit('SHOW_NAVBAR')
-  },
-  hiddenNavBar ({ commit }) {
-    commit('HIDDEN_NAVBAR')
-  },
-  set_back_title ({ commit }, title) {
-    commit('SET_BACK_TITLE', title)
+  getUserInfo ({ commit }) {
+    api.getUserInfo().then((data) => {
+      console.log(data)
+      commit('GET_USER_INFO', data)
+    })
   }
 }
 

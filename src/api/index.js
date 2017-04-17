@@ -13,5 +13,8 @@ export default {
       },
       credentials: true
     })
+  },
+  getUserInfo () {
+    return Vue.http.get('/api/userinfo')
   }
 }
