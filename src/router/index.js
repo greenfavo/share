@@ -40,6 +40,10 @@ export default new Router({
     {
       path: '/search',
       component: resolve => require(['../views/Search'], resolve)
+    },
+    {
+      path: '/vertify',
+      component: resolve => require(['../views/Vertify'], resolve)
     }
   ]
 })

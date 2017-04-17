@@ -6,6 +6,9 @@
     <mu-text-field label="简介" labelFloat fullWidth/>
     <mu-text-field label="出版社" labelFloat fullWidth/>
     <mu-date-picker hintText="出版日期" maxDate="2017-02-08" fullWidth style="lineHeight:72px"/>
+    <mu-text-field label="手机号" labelFloat fullWidth/>
+    <mu-text-field label="微信号" labelFloat fullWidth/>
+    <mu-text-field label="微信号" labelFloat fullWidth/>
     <div class="col2">
       <span class="mR20 light">封面</span>
       <Upload/>

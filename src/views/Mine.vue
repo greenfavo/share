@@ -14,12 +14,8 @@
     <mu-divider />
 
     <mu-list>
-      <mu-list-item title="借阅历史">
-        <mu-icon value="navigate_next" slot="right"/>
-      </mu-list-item>
-      <mu-divider inset />
-      <mu-list-item title="校园认证">
-        <mu-icon value="navigate_next" slot="right"/>
+      <mu-list-item title="校园认证" to="vertify">
+        <mu-icon value="navigate_next" slot="right" />
       </mu-list-item>
     </mu-list>
   </div>
