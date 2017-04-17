@@ -30,7 +30,7 @@ export default {
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    this.$store.dispath('getUserInfo')
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
