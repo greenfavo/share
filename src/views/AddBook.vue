@@ -2,7 +2,7 @@
   <div class="main">
      <mu-toast v-if="toast" message="添加失败，请重试" @close="hideToast"/>
      <!-- <mu-circular-progress :size="60" :strokeWidth="3" /> -->
-    <mu-text-field label="ISBN" labelFloat fullWidth v-model="ISBN"/>
+    <mu-text-field label="ISBN" labelFloat fullWidth v-model="ISBN" required/>
     <mu-text-field label="书名" labelFloat fullWidth v-model="name"/>
     <mu-text-field label="作者" labelFloat fullWidth v-model="author"/>
     <mu-text-field label="简介" labelFloat fullWidth v-model="summary"/>
@@ -20,7 +20,6 @@
       <Upload @uploadSuccess="handleUpload"/>
     </div>
     <mu-raised-button label="确定" primary fullWidth @click="handleAdd()" :disabled="disabled"/>
-
   </div>
 </template>
 
@@ -37,7 +36,7 @@ export default {
         '体育馆前', '西篮球场', '南区操场', '南湖操场',
         '南湖园', '南书院', '美院圆楼', '北区公寓篮球场', '教工食堂'
       ],
-      disabled: true,
+      disabled: false,
       toast: false,
       ISBN: '',
       name: '',
@@ -57,6 +56,7 @@ export default {
   },
   methods: {
     handleAdd () {
+      this.disabled = true
       let opts = {
         ISBN: this.ISBN,
         name: this.name,
@@ -67,14 +67,8 @@ export default {
         cover: this.cover,
         area: this.area
       }
-      for (let item in opts) {
-        if (item) {
-          this.disabled = false
-        } else {
-          this.disabled = true
-        }
-      }
       api.addBook(opts).then((res) => {
+        this.disabled = false
         if (res.body.result === 'ok') {
           this.$route.push('/shelf')
         } else {
