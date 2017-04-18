@@ -22,8 +22,10 @@ export default {
   methods: {
     handleChange (e) {
       let file = e.target.files[0]
+      let fd = new window.FormData()
+      fd.append('file', file)
       this.loading = true
-      api.upload({file}).then((res) => {
+      api.upload(fd).then((res) => {
         this.loading = false
         res = res.body
         if (res.result === 'ok') {
