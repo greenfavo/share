@@ -1,5 +1,5 @@
 <template>
-<mu-circular-progress :size="60" :strokeWidth="3" v-if="loading"/>
+<mu-circular-progress :size="40"  v-if="loading"/>
 <div v-else>
   <input type="file" accept="image/*" style="display:none;"  id="file" @change="handleChange">
   <label for="file" class="imgContainer">

@@ -5,11 +5,10 @@ Vue.use(VueResource)
 
 export default {
   addBook (opts) {
-    return Vue.http.post(`/api/book`, opts, {
+    return Vue.http.post('/api/book', opts, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      credentials: true
+      }
     })
   },
   // 获取用户信息
