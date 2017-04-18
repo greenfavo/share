@@ -2,13 +2,14 @@
   <div class="wrap">
     <person-cover
       :nickname="userInfo.nickname"
-      :avatar="userInfo.headimgurl"/>
+      :avatar="userInfo.headimgurl"
+      :score="userInfo.score || 100"/>
     <mu-list>
       <mu-sub-header>消息通知</mu-sub-header>
       <mu-list-item title="系统通知">
         <mu-icon value="navigate_next" slot="right"/>
       </mu-list-item>
-      <mu-divider inset />
+      <mu-divider  />
       <mu-list-item title="书友私信">
         <mu-icon value="navigate_next" slot="right"/>
       </mu-list-item>

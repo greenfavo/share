@@ -1,7 +1,7 @@
 <template>
   <div class="personInfo">
-    <img src="../assets/cover.jpg" alt="" />
-    <mu-flat-button label="信用积分:100" icon="navigate_next" labelPosition="before" class="score" />
+    <img src="http://onzj7fisz.bkt.clouddn.com/cover.webp" alt="" />
+    <mu-flat-button :label="`信用积分:${score}`" icon="navigate_next" labelPosition="before" class="score" />
     <div class="avatar">
       <mu-avatar :src="avatar" :size="60"/>
       <span>{{nickname}}</span>
@@ -13,7 +13,8 @@
 export default {
   props: {
     nickname: String,
-    avatar: String
+    avatar: String,
+    score: Number
   }
 }
 </script>
@@ -33,7 +34,7 @@ img{
   color: #f2f2f2;
 }
 .avatar {
-  position: absolute;;
+  position: absolute;
   left: 40%;
   top: 40px;
   display: flex;
