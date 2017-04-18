@@ -36,6 +36,13 @@ export default {
   components: {
     PersonCover
   },
+  watch: {
+    'userInfo' (val) {
+      if (val) {
+        this.userInfo = val
+      }
+    }
+  },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
     this.$store.dispatch('getUserInfo').then(() => {
