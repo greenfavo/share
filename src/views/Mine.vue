@@ -20,6 +20,10 @@
       <mu-list-item title="校园认证" to="vertify">
         <mu-icon value="navigate_next" slot="right" />
       </mu-list-item>
+      <mu-divider  />
+      <mu-list-item title="联系方式">
+        <mu-icon value="navigate_next" slot="right"/>
+      </mu-list-item>
     </mu-list>
   </div>
 </template>
@@ -28,26 +32,20 @@
 import PersonCover from '../components/PersonCover'
 
 export default {
-  data () {
-    return {
-      userInfo: {}
-    }
-  },
   components: {
     PersonCover
   },
-  watch: {
-    'userInfo' (val) {
-      if (val) {
-        this.userInfo = val
+  computed: {
+    userInfo () {
+      let userInfo = this.$store.state.userInfo || {}
+      if (userInfo) {
+        return userInfo
       }
     }
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    this.$store.dispatch('getUserInfo').then(() => {
-      this.userInfo = this.$store.state.userInfo
-    })
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
