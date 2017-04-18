@@ -70,7 +70,7 @@ export default {
       api.addBook(opts).then((res) => {
         this.disabled = false
         if (res.body.result === 'ok') {
-          this.$route.push('/shelf')
+          this.$router.push('shelf')
         } else {
           this.showToast()
           console.log(res.body.data)
