@@ -4,8 +4,8 @@
       v-model="searchTxt" @change="handleSearch" @blur="searchTxt=''"/>
     <div class="main">
       <book-list></book-list>
-      <book-list></book-list>
-      <book-list></book-list>
+      <!-- <book-list></book-list>
+      <book-list></book-list> -->
     </div>
   </div>
 </template>

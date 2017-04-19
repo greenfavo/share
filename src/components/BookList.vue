@@ -14,9 +14,9 @@
         </ul>
       </router-link>
     </section>
-    <mu-infinite-scroll
+    <!-- <mu-infinite-scroll
       :scroller="scroller" loadingText="加载中..."
-      :loading="loading" @load="loadMore"/>
+      :loading="loading" @load="loadMore"/> -->
   </div>
 </template>
 
@@ -51,3 +51,11 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.demo-infinite-container{
+  height: 600px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d9d9d9;
+}
+</style>

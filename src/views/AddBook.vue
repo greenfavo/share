@@ -51,6 +51,17 @@ export default {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.commit('SET_BACK_TITLE', '添加图书')
   },
+  create () {
+    if (this.from === 'scan') {
+      this.ISBN = this.$route.query.isbn
+      this.name = this.bookInfo.title
+      this.author = this.bookInfo.author
+      this.publish = this.bookInfo.publisher
+      this.publish_date = this.bookInfo.pubdate
+      this.summary = this.bookInfo.summary
+      this.cover = this.bookInfo.image
+    }
+  },
   components: {
     Upload
   },
@@ -88,6 +99,17 @@ export default {
     hideToast () {
       this.toast = false
       if (this.toastTimer) clearTimeout(this.toastTimer)
+    }
+  },
+  computed: {
+    from () {
+      return this.$route.query.from
+    },
+    bookInfo () {
+      if (this.from === 'scan') {
+        return this.$store.state.book
+      }
+      return {}
     }
   }
 }

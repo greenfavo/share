@@ -17,6 +17,7 @@
         <mu-list-item title="查看详情" to="book" />
         <mu-list-item title="删除" v-if="type==='private'"/>
         <mu-list-item title="编辑" v-if="type==='private'"/>
+        <mu-list-item title="还书" v-if="type==='borrow'"/>
       </mu-list>
     </mu-bottom-sheet>
   </div>

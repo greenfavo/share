@@ -11,7 +11,8 @@ const state = {
   wechatConfig: {
     debug: true,
     jsApiList: ['scanQRCode']
-  }
+  },
+  book: {}
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   },
   GET_WECHAT_CONFIG (state, config) {
     state.wechatConfig = Object.assign({}, state.wechatConfig, config)
+  },
+  GET_BOOK_BY_ISBN (state, book) {
+    state.book = book
   }
 }
 
@@ -50,6 +54,14 @@ const actions = {
         commit('GET_WECHAT_CONFIG', res.data)
       } else {
         console.log(res.data)
+      }
+    })
+  },
+  getBookByISBN ({ commit, isbn }) {
+    api.getBookByISBN(isbn).then((res) => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('GET_BOOK_BY_ISBN', res.data)
       }
     })
   }
