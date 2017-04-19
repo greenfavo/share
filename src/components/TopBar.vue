@@ -1,6 +1,9 @@
 <template>
   <mu-appbar title="小书屋">
-    <mu-icon-button icon='notifications' slot="right" href="#/notify"/>
+    <div slot="right" >
+      <mu-icon-button icon='notifications'  to="notify" />
+      <div class="badge">10</div>
+    </div>
   </mu-appbar>
 </template>
 <script type="text/javascript">

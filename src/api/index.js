@@ -23,6 +23,8 @@ export default {
   // 获取微信js-sdk签名
   getWechat () {
     let url = window.location.href.split('#')[0]
-    return Vue.http.get('/api/jssdk', encodeURIComponent(url))
+    return Vue.http.get('/api/jssdk', {
+      url: encodeURIComponent(url)
+    })
   }
 }
