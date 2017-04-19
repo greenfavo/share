@@ -28,7 +28,7 @@ const mutations = {
     state.userInfo = userInfo
   },
   GET_WECHAT_CONFIG (state, config) {
-    Object.assign(state.wechatConfig, config)
+    state.wechatConfig = Object.assign({}, state.wechatConfig, config)
   }
 }
 
