@@ -7,7 +7,11 @@ Vue.use(Vuex)
 const state = {
   isShowNavBar: true, // 是否显示导航栏
   backTitle: '返回', // 后退按钮标题
-  userInfo: {}
+  userInfo: {},
+  wechatConfig: {
+    debug: true,
+    jsApiList: ['scanQRCode']
+  }
 }
 
 const mutations = {
@@ -22,6 +26,9 @@ const mutations = {
   },
   GET_USER_INFO (state, userInfo) {
     state.userInfo = userInfo
+  },
+  GET_WECHAT_CONFIG (state, config) {
+    Object.assign(state.wechatConfig, config)
   }
 }
 
@@ -31,6 +38,16 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_USER_INFO', res.data)
+      } else {
+        console.log(res.data)
+      }
+    })
+  },
+  getWechatConfig ({ commit }) {
+    api.getWechat().then((res) => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('GET_WECHAT_CONFIG', res.data)
       } else {
         console.log(res.data)
       }

@@ -4,6 +4,7 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 export default {
+  // 添加图书
   addBook (opts) {
     return Vue.http.post('/api/book', opts, {
       headers: {
@@ -18,5 +19,10 @@ export default {
   // 上传文件
   upload (opts) {
     return Vue.http.post('/api/image', opts)
+  },
+  // 获取微信js-sdk签名
+  getWechat () {
+    let url = window.location.origin
+    return Vue.http.get('/api/jssdk', url)
   }
 }
