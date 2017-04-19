@@ -24,7 +24,9 @@ export default {
   getWechat () {
     let url = window.location.href.split('#')[0]
     return Vue.http.get('/api/jssdk', {
-      url: encodeURIComponent(url)
+      params: {
+        url: encodeURIComponent(url)
+      }
     })
   }
 }
