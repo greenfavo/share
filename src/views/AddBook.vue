@@ -107,6 +107,7 @@ export default {
     },
     bookInfo () {
       if (this.from === 'scan') {
+        console.log(this.from)
         console.log(this.$store.state.book)
         return this.$store.state.book
       }
