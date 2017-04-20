@@ -17,7 +17,7 @@
     </mu-select-field>
     <div class="col2">
       <span class="mR20 light">*封面</span>
-      <Upload @uploadSuccess="handleUpload" :cover="bookInfo.image"/>
+      <Upload @uploadSuccess="handleUpload" :cover="bookInfo.image || ''"/>
     </div>
     <mu-raised-button label="确定" primary fullWidth @click="handleAdd()" :disabled="disabled"/>
   </div>

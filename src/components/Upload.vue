@@ -22,7 +22,7 @@ export default {
   props: {
     cover: String
   },
-  mouted () {
+  mounted () {
     if (this.cover) {
       this.url = this.cover
     }
