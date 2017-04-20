@@ -38,5 +38,17 @@ export default {
   // 获取所有图书
   getBooks (timestamp = '') {
     return Vue.http.get(`${API}/books`)
+  },
+  // 校园认证
+  vertify (opts) {
+    return Vue.http.post(`${API}/cert`, opts, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+  // 取消校园认证
+  cancleVertify () {
+    return Vue.http.delete(`${API}/cert`)
   }
 }

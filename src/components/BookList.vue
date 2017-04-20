@@ -21,14 +21,10 @@
 
 <script type="text/javascript">
 export default {
-  data () {
-    return {
-      books: []
-    }
-  },
-  watch: {
-    'books' (val) {
-      this.books = val
+  computed: {
+    books () {
+      console.log('books: ', this.$store.state.books)
+      return this.$store.state.books || []
     }
   },
   mounted () {
@@ -36,10 +32,7 @@ export default {
   },
   methods: {
     loadData () {
-      this.$store.dispatch('getBooks').then(() => {
-        console.log('books: ', this.$store.state.books)
-        this.books = this.$store.state.books
-      })
+      this.$store.dispatch('getBooks')
     },
     loadMore () {
     }

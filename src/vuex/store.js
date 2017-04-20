@@ -8,6 +8,7 @@ const state = {
   isShowNavBar: true, // 是否显示导航栏
   backTitle: '返回', // 后退按钮标题
   userInfo: {},
+  vertify: false,
   wechatConfig: {
     debug: false,
     jsApiList: ['scanQRCode']
@@ -38,6 +39,9 @@ const mutations = {
   },
   GET_ALL_BOOKS (state, books) {
     state.books = books
+  },
+  SET_VERTIFY (state, isVertify) {
+    state.vertify = isVertify
   }
 }
 
