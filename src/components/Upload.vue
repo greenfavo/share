@@ -22,9 +22,12 @@ export default {
   props: {
     cover: String
   },
-  mounted () {
-    if (this.cover) {
-      this.url = this.cover
+  watch: {
+    'cover' (val) {
+      console.log('cover: ', val)
+      if (val) {
+        this.url = this.cover
+      }
     }
   },
   methods: {
