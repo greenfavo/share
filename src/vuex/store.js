@@ -33,6 +33,7 @@ const mutations = {
   },
   GET_BOOK_BY_ISBN (state, book) {
     state.book = book
+    console.log(state.book)
   }
 }
 
