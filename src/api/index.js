@@ -31,6 +31,6 @@ export default {
   },
   // 通过isbn获取图书信息
   getBookByISBN (isbn) {
-    return Vue.http.get(`api/book/${isbn}`)
+    return Vue.http.get(`api/isbn/${isbn}`)
   }
 }
