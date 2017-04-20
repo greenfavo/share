@@ -31,6 +31,7 @@ li{
 .cover {
   width: 100px;
   height: 100%;
+  background: gray
 }
 a {
   cursor: pointer;
@@ -87,7 +88,11 @@ li {
   line-height: 24px;
 }
 .ellipsis {
+  width: 300px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: normal;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
