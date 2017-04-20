@@ -51,7 +51,8 @@ export default {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.commit('SET_BACK_TITLE', '添加图书')
     if (this.from === 'scan') {
-      console.log(`图书信息:${this.bookInfo}`)
+      console.log('图书信息', this.bookInfo)
+      console.log(typeof this.bookInfo)
       this.ISBN = this.$route.query.isbn
       this.name = this.bookInfo.title
       this.author = this.bookInfo.author
