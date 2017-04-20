@@ -57,7 +57,7 @@ const actions = {
       }
     })
   },
-  getBookByISBN ({ commit, isbn }) {
+  getBookByISBN ({ commit }, isbn) {
     api.getBookByISBN(isbn).then((res) => {
       res = res.body
       if (res.result === 'ok') {
