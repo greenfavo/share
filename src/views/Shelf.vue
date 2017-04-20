@@ -75,7 +75,6 @@ export default {
           let isbn = result.split(',')[1]
           console.log(isbn)
           this.$store.dispatch('getBookByISBN', isbn).then(() => {
-            this.open = false
             this.$router.push({
               'path': 'addBook',
               'query': {'from': 'scan', 'isbn': isbn}
