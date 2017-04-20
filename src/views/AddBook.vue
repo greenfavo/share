@@ -50,10 +50,8 @@ export default {
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.commit('SET_BACK_TITLE', '添加图书')
-  },
-  created () {
-    console.log(this.bookInfo)
     if (this.from === 'scan') {
+      console.log(this.bookInfo)
       this.ISBN = this.$route.query.isbn
       this.name = this.bookInfo.title
       this.author = this.bookInfo.author
@@ -104,13 +102,11 @@ export default {
   },
   computed: {
     from () {
-      return this.$route.query.from
+      return this.$route.query.from || ''
     },
     bookInfo () {
-      console.log(this.from)
-      console.log(this.$store.state.book)
       if (this.from === 'scan') {
-        return this.$store.state.book
+        return this.$store.state.book || {}
       }
     }
   }
