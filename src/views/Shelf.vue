@@ -73,7 +73,7 @@ export default {
         success: (res) => {
           let result = res.resultStr // 当needResult 为 1 时，扫码返回的结果
           let isbn = result.split(',')[1]
-          this.$store.dispatch('getBookByISBN', isbn).then(() => {
+          this.$store.dispatch('getBookByISBN', { isbn }).then(() => {
             this.$router.push({
               'path': 'addBook',
               'query': {'from': 'scan', 'isbn': isbn}})
