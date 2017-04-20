@@ -32,7 +32,7 @@ const mutations = {
     state.wechatConfig = Object.assign({}, state.wechatConfig, config)
   },
   GET_BOOK_BY_ISBN (state, book) {
-    state.book = book
+    state.book = JSON.parse(book)
     console.log(state.book)
   }
 }

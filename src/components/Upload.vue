@@ -19,6 +19,14 @@ export default {
       loading: false
     }
   },
+  props: {
+    cover: String
+  },
+  mouted () {
+    if (this.cover) {
+      this.url = this.cover
+    }
+  },
   methods: {
     handleChange (e) {
       let file = e.target.files[0]
