@@ -4,9 +4,9 @@
     <mu-text-field label="ISBN" labelFloat fullWidth v-model="ISBN" required/>
     <mu-text-field label="书名" labelFloat fullWidth v-model="name"/>
     <mu-text-field label="作者" labelFloat fullWidth v-model="author"/>
+    <mu-text-field label="译者" labelFloat fullWidth v-model="translator"/>
     <mu-text-field label="简介" labelFloat fullWidth v-model="summary"/>
     <mu-text-field label="出版社" labelFloat fullWidth v-model="publish"/>
-    <mu-date-picker hintText="出版日期" :maxDate="new Date()" fullWidth style="lineHeight:72px" v-model="publishDate"/>
     <mu-select-field v-model="area"  label="区域" fullWidth
     :maxHeight="200">
       <mu-menu-item
@@ -40,8 +40,8 @@ export default {
       ISBN: '',
       name: '',
       author: '',
+      translator: '',
       publish: '',
-      publishDate: '',
       summary: '',
       cover: '' // 图书封面
     }
@@ -63,9 +63,9 @@ export default {
         console.log('图书信息', this.bookInfo)
         this.ISBN = this.$route.query.isbn
         this.name = this.bookInfo.title
-        this.author = this.bookInfo.author[0]
+        this.author = this.bookInfo.author.join(' ')
+        this.translator = this.bookInfo.translator.join(' ')
         this.publish = this.bookInfo.publisher
-        this.publishDate = new Date(this.bookInfo.pubdate)
         this.summary = this.bookInfo.summary
         this.cover = this.bookInfo.image
       }
@@ -86,7 +86,7 @@ export default {
         name: this.name,
         author: this.author,
         publish: this.publish,
-        publishDate: this.publishDate,
+        translator: this.translator,
         summary: this.summary,
         cover: this.cover,
         area: this.area
