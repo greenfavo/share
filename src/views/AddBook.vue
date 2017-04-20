@@ -46,6 +46,18 @@ export default {
       cover: '' // 图书封面
     }
   },
+  computed: {
+    from () {
+      return this.$route.query.from || ''
+    },
+    bookInfo () {
+      console.log('from= ', this.from)
+      if (this.from === 'scan') {
+        console.log('bookInfo', this.$store.state.book)
+        return this.$store.state.book
+      }
+    }
+  },
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.commit('SET_BACK_TITLE', '添加图书')
@@ -98,16 +110,6 @@ export default {
     hideToast () {
       this.toast = false
       if (this.toastTimer) clearTimeout(this.toastTimer)
-    }
-  },
-  computed: {
-    from () {
-      return this.$route.query.from || ''
-    },
-    bookInfo () {
-      if (this.from === 'scan') {
-        return this.$store.state.book || {}
-      }
     }
   }
 }
