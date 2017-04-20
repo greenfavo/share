@@ -24,7 +24,6 @@
 
 <script type="text/javascript">
 import BookGrid from '../components/BookGrid'
-import api from '../api'
 
 export default {
   components: {
@@ -40,20 +39,7 @@ export default {
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
     this.trigger = this.$refs.button.$el
-    // this.$store.dispatch('getWechatConfig').then(() => {
-    //   window.wx.config(this.$store.state.wechatConfig)
-    // })
-    api.getWechat().then((res) => {
-      res = res.body
-      if (res.result === 'ok') {
-        let config = {
-          debug: true,
-          jsApiList: ['scanQRCode']
-        }
-        config = Object.assign({}, config, res.data)
-        window.wx.config(config)
-      }
-    })
+    this.$store.dispatch('getWechatConfig')
   },
   methods: {
     handleTabChange (val) {

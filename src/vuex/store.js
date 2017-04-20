@@ -9,7 +9,7 @@ const state = {
   backTitle: '返回', // 后退按钮标题
   userInfo: {},
   wechatConfig: {
-    debug: true,
+    debug: false,
     jsApiList: ['scanQRCode']
   },
   book: {}
@@ -30,6 +30,7 @@ const mutations = {
   },
   GET_WECHAT_CONFIG (state, config) {
     state.wechatConfig = Object.assign({}, state.wechatConfig, config)
+    window.wx.config(state.wechatConfig)
   },
   GET_BOOK_BY_ISBN (state, book) {
     state.book = book
@@ -51,7 +52,6 @@ const actions = {
     api.getWechat().then((res) => {
       res = res.body
       if (res.result === 'ok') {
-        console.log('actions', res.data)
         commit('GET_WECHAT_CONFIG', res.data)
       } else {
         console.log(res.data)
