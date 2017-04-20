@@ -52,6 +52,7 @@ export default {
     this.$store.commit('SET_BACK_TITLE', '添加图书')
   },
   create () {
+    console.log(this.bookInfo)
     if (this.from === 'scan') {
       this.ISBN = this.$route.query.isbn
       this.name = this.bookInfo.title
@@ -106,9 +107,9 @@ export default {
       return this.$route.query.from
     },
     bookInfo () {
+      console.log(this.from)
+      console.log(this.$store.state.book)
       if (this.from === 'scan') {
-        console.log(this.from)
-        console.log(this.$store.state.book)
         return this.$store.state.book
       }
     }
