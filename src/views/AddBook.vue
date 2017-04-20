@@ -107,7 +107,8 @@ export default {
     },
     bookInfo () {
       if (this.from === 'scan') {
-        return this.$store.state.book || {}
+        let book = this.$store.state.book || {}
+        return JSON.parse(book)
       }
     }
   }
