@@ -65,7 +65,11 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_BOOK_BY_ISBN', res.data)
+      } else {
+        console.log(res)
       }
+    }, (err) => {
+      console.log(err)
     })
   }
 }

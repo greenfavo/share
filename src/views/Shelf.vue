@@ -79,6 +79,8 @@ export default {
               'path': 'addBook',
               'query': {'from': 'scan', 'isbn': isbn}
             })
+          }, (err) => {
+            console.log('actions error', err)
           })
         }
       })
