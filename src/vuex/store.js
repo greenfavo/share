@@ -53,6 +53,7 @@ const actions = {
     api.getWechat().then((res) => {
       res = res.body
       if (res.result === 'ok') {
+        console.log('actions', res.data)
         commit('GET_WECHAT_CONFIG', res.data)
       } else {
         console.log(res.data)
@@ -63,7 +64,6 @@ const actions = {
     api.getBookByISBN(isbn).then((res) => {
       res = res.body
       if (res.result === 'ok') {
-        console.log('actions', typeof res.data)
         commit('GET_BOOK_BY_ISBN', res.data)
       }
     })

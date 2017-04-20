@@ -1,13 +1,12 @@
 <template>
   <div class="main">
-     <mu-toast v-if="toast" message="添加失败，请重试" @close="hideToast"/>
-     <!-- <mu-circular-progress :size="60" :strokeWidth="3" /> -->
+    <mu-toast v-if="toast" message="添加失败，请重试" @close="hideToast"/>
     <mu-text-field label="ISBN" labelFloat fullWidth v-model="ISBN" required/>
     <mu-text-field label="书名" labelFloat fullWidth v-model="name"/>
     <mu-text-field label="作者" labelFloat fullWidth v-model="author"/>
     <mu-text-field label="简介" labelFloat fullWidth v-model="summary"/>
     <mu-text-field label="出版社" labelFloat fullWidth v-model="publish"/>
-    <mu-date-picker hintText="出版日期" :maxDate="new Date()" fullWidth style="lineHeight:72px" v-model="publish_date"/>
+    <mu-date-picker hintText="出版日期" :maxDate="new Date()" fullWidth style="lineHeight:72px" v-model="publishDate"/>
     <mu-select-field v-model="area"  label="区域" fullWidth
     :maxHeight="200">
       <mu-menu-item
@@ -16,7 +15,7 @@
         :title="area"/>
     </mu-select-field>
     <div class="col2">
-      <span class="mR20 light">*封面</span>
+      <span class="mR20 light">封面</span>
       <Upload @uploadSuccess="handleUpload" :cover="bookInfo.image || ''"/>
     </div>
     <mu-raised-button label="确定" primary fullWidth @click="handleAdd()" :disabled="disabled"/>
@@ -42,7 +41,7 @@ export default {
       name: '',
       author: '',
       publish: '',
-      publish_date: '',
+      publishDate: '',
       summary: '',
       cover: '' // 图书封面
     }
@@ -57,7 +56,7 @@ export default {
       this.name = this.bookInfo.title
       this.author = this.bookInfo.author[0]
       this.publish = this.bookInfo.publisher
-      this.publish_date = this.bookInfo.pubdate
+      this.publishDate = this.bookInfo.pubdate
       this.summary = this.bookInfo.summary
       this.cover = this.bookInfo.image
     }
@@ -73,7 +72,7 @@ export default {
         name: this.name,
         author: this.author,
         publish: this.publish,
-        publish_date: this.publish_date,
+        publishDate: this.publishDate,
         summary: this.summary,
         cover: this.cover,
         area: this.area
