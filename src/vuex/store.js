@@ -63,6 +63,7 @@ const actions = {
     api.getBookByISBN(isbn).then((res) => {
       res = res.body
       if (res.result === 'ok') {
+        console.log('actions', typeof res.data)
         commit('GET_BOOK_BY_ISBN', res.data)
       }
     })

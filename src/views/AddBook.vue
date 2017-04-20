@@ -52,10 +52,10 @@ export default {
     this.$store.commit('SET_BACK_TITLE', '添加图书')
     if (this.from === 'scan') {
       console.log('图书信息', this.bookInfo)
-      console.log(typeof this.bookInfo)
+      console.log('addBook', typeof this.bookInfo)
       this.ISBN = this.$route.query.isbn
       this.name = this.bookInfo.title
-      this.author = this.bookInfo.author
+      this.author = this.bookInfo.author[0]
       this.publish = this.bookInfo.publisher
       this.publish_date = this.bookInfo.pubdate
       this.summary = this.bookInfo.summary
@@ -108,7 +108,7 @@ export default {
     bookInfo () {
       if (this.from === 'scan') {
         let book = this.$store.state.book || {}
-        return JSON.parse(book)
+        return book
       }
     }
   }
