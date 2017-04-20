@@ -51,20 +51,17 @@ export default {
       return this.$route.query.from || ''
     },
     bookInfo () {
-      if (this.from === 'scan') {
-        console.log('bookInfo', this.$store.state.book)
-        return this.$store.state.book
-      }
+      return this.$store.state.book
     }
   },
   watch: {
     'bookInfo' (val) {
-      if (val) {
+      if (val && this.from === 'scan') {
         console.log('图书信息', this.bookInfo)
         this.ISBN = this.$route.query.isbn
         this.name = this.bookInfo.title
-        this.author = this.bookInfo.author.join(' ')
-        this.translator = this.bookInfo.translator.join(' ')
+        this.author = this.bookInfo.author.join(',')
+        this.translator = this.bookInfo.translator.join(',')
         this.publish = this.bookInfo.publisher
         this.summary = this.bookInfo.summary
         this.cover = this.bookInfo.image

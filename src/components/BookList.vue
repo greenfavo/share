@@ -1,61 +1,48 @@
 <template>
-  <div >
+  <div>
     <!-- <p class="subHeader">
       <span>推荐</span>
       <span>更多></span>
     </p> -->
-    <section  v-for="n in list">
-      <router-link to="/book?id=1" class="bookSec" tag="div">
-        <img src="../assets/cover/2.jpg" class="cover" />
-        <ul>
-          <li><b>要塞</b></li>
-          <li class="light">[法]圣埃克苏佩里</li>
-          <li class="light">小王子作者圣埃克苏佩里的最后遗作</li>
+    <mu-circular-progress :size="40"  v-if="books.length === 0" />
+    <section  v-for="item in books">
+      <router-link :to="`/book/${item._id}`" class="bookSec" tag="div">
+        <img :src="item.cover" class="cover" />
+        <ul class="mL20">
+          <li><b>{{item.name}}</b></li>
+          <li class="light">{{item.author}}</li>
+          <li class="light ellipsis">{{item.summary}}</li>
         </ul>
       </router-link>
     </section>
-    <!-- <mu-infinite-scroll
-      :scroller="scroller" loadingText="加载中..."
-      :loading="loading" @load="loadMore"/> -->
+    <p class="txtCenter pB20" @click="loadMore" v-show="books.length>10">加载更多</p>
   </div>
 </template>
 
 <script type="text/javascript">
 export default {
   data () {
-    const list = []
-    for (let i = 0; i < 10; i++) {
-      list.push('item' + (i + 1))
-    }
     return {
-      list,
-      num: 2,
-      loading: false,
-      scroller: null
+      books: []
+    }
+  },
+  watch: {
+    'books' (val) {
+      this.books = val
     }
   },
   mounted () {
-    this.scroller = this.$el
+    this.loadData()
   },
   methods: {
+    loadData () {
+      this.$store.dispatch('getBooks').then(() => {
+        console.log('books: ', this.$store.state.books)
+        this.books = this.$store.state.books
+      })
+    },
     loadMore () {
-      this.loading = true
-      setTimeout(() => {
-        for (let i = this.num; i < this.num + 6; i++) {
-          this.list.push('item' + (i + 1))
-        }
-        this.num += 6
-        this.loading = false
-      }, 2000)
     }
   }
 }
 </script>
-<style lang="css">
-.demo-infinite-container{
-  height: 600px;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid #d9d9d9;
-}
-</style>

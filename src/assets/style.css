@@ -38,11 +38,17 @@ a {
 li {
   margin-bottom: 5px;
 }
-.mT20{
+.mT20 {
   margin-top: 20px;
+}
+.pB20 {
+  padding-bottom: 20px;
 }
 .mR20 {
   margin-right: 20px;
+}
+.mL20 {
+  margin-left: 20px;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s linear
@@ -79,4 +85,9 @@ li {
   font-size: 12px;
   text-align: center;
   line-height: 24px;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
 }

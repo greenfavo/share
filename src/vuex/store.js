@@ -12,7 +12,8 @@ const state = {
     debug: false,
     jsApiList: ['scanQRCode']
   },
-  book: {}
+  book: {}, // 扫码获取的图书
+  books: []
 }
 
 const mutations = {
@@ -34,6 +35,9 @@ const mutations = {
   },
   GET_BOOK_BY_ISBN (state, book) {
     state.book = book
+  },
+  GET_ALL_BOOKS (state, books) {
+    state.books = books
   }
 }
 
@@ -68,6 +72,16 @@ const actions = {
       }
     }, (err) => {
       console.log(err)
+    })
+  },
+  getBooks ({ commit }, timestamp = '') {
+    api.getBooks(timestamp).then((res) => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('GET_ALL_BOOKS', res.data)
+      } else {
+        throw new Error('fail')
+      }
     })
   }
 }
