@@ -97,9 +97,7 @@ export default {
   },
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
-    if (!this.bookInfo.name) {
-      this.$store.dispatch('getBookInfo', this.id)
-    }
+    this.$store.dispatch('getBookInfo', this.id)
   }
 }
 </script>

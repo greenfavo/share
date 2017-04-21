@@ -109,7 +109,7 @@ const actions = {
     })
   },
   getUserBook ({ commit, state }, type = '') {
-    api.getUserBook(state.userInfo['_id'], type).then((res) => {
+    api.getUserBook(state.userInfo['id'], type).then((res) => {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_USER_BOOK', res.data, type)
