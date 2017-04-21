@@ -17,7 +17,7 @@ export default new Router({
       component: resolve => require(['../views/Shelf'], resolve)
     },
     {
-      path: '/book',
+      path: '/book/:id',
       component: resolve => require(['../views/BookDetail'], resolve)
     },
     {

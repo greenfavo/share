@@ -7,7 +7,10 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-teal.css'
 import router from './router'
+import Toast from './plugins/Toast.js'
+
 Vue.use(MuseUI)
+Vue.use(Toast)
 
 /* eslint-disable no-new */
 new Vue({

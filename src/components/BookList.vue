@@ -11,17 +11,17 @@
         <ul class="mL20">
           <li><b>{{item.name}}</b></li>
           <li class="light">{{item.author}}</li>
-          <li class="light ellipsis">{{item.summary|sliceWord(30)}}</li>
+          <li class="light">{{item.summary|sliceWord(50)}}</li>
         </ul>
       </router-link>
     </section>
-     <!-- <section  v-for="n in 16">
+   <!--   <section  v-for="n in 16">
       <router-link :to="`/book`" class="bookSec" tag="div">
         <img src="../assets/cover/1.jpg" class="cover" />
         <ul class="mL20">
           <li><b>小王子</b></li>
           <li class="light">维多利亚</li>
-          <li class="light">{{'给成年人才看得懂的童话故事了了了了啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了啦啦啦啦' |sliceWord(30)}}</li>
+          <li class="light">{{'给成年人才看得懂的童话故事了了了了啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了啦啦啦啦啊啊啊啊啊啊啊啊啊啊啊啊' |sliceWord(70)}}</li>
         </ul>
       </router-link>
     </section> -->

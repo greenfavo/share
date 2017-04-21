@@ -7,7 +7,8 @@
   <div class="main" v-else>
     <mu-text-field label="学号" labelFloat fullWidth v-model="username"/>
     <mu-text-field label="密码" type="password" labelFloat fullWidth v-model="password"/>
-    <mu-raised-button label="确定" primary fullWidth @click="handleVertify"/>
+    <mu-raised-button label="确定" primary fullWidth @click="handleVertify"
+      :disabled="disabled"/>
   </div>
 </template>
 <script>
@@ -21,7 +22,8 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      disabled: false
     }
   },
   computed: {
@@ -34,15 +36,22 @@ export default {
       if (!this.username || !this.password) {
         return
       }
+      this.disabled = true
       let opts = {
         username: this.username,
         password: this.password
       }
       api.vertify(opts).then((res) => {
+        this.disabled = false
         res = res.body
         if (res.result === 'ok') {
           this.$store.commit('SET_VERTIFY', true)
+        } else {
+          this.$msg('error', res.data)
         }
+      }, (error) => {
+        this.disabled = false
+        this.$msg('error', error.body.data || '操作失败')
       })
     },
     cancelVertify () {
@@ -50,6 +59,8 @@ export default {
         res = res.body
         if (res.result === 'ok') {
           this.$store.commit('SET_VERTIFY', false)
+        } else {
+          this.$msg('error', res.data)
         }
       })
     }
