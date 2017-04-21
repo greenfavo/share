@@ -58,5 +58,9 @@ export default {
   // 添加图书评论
   addComment (opts) {
     return Vue.http.post(`${API}/comment`, opts)
+  },
+  // 获取某个用户的图书
+  getUserBook (userId, type = '') {
+    return Vue.http.get(`${API}/books/user/${userId}?type=${type}`)
   }
 }

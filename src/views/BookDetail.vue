@@ -51,10 +51,9 @@
         <mu-icon value="location_on" />{{bookInfo.area}}
       </p>
       <div>简介:
-        <p v-show="showAll">{{bookInfo.summary}}</p>
-        <p v-show="!showAll">{{bookInfo.summary|sliceWord(60)}}</p>
+        {{showAll? bookInfo.summary : bookInfo.summary|sliceWord(70)}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>50"
+          v-if="bookInfo.summary.length>70"
           @click="showAll=!showAll" />
       </div><br/>
       <mu-raised-button label="借阅"  primary fullWidth />

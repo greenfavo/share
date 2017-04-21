@@ -8,8 +8,8 @@
     </mu-list-item>
     <mu-list-item :title="item.userName" v-for="item in comments"
       :afterText="item.date|dateFormat">
-      <router-link :to="`/user/${item.userId}`">
-        <mu-avatar :src="item.headimgurl" slot="leftAvatar"/>
+      <router-link :to="`/user/${item.userId}`" slot="leftAvatar">
+        <mu-avatar :src="item.headimgurl"/>
       </router-link>
       <span slot="describe">
         {{item.content}}

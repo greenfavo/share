@@ -7,7 +7,7 @@
    </mu-tabs>
     <div class="main mT20">
       <div v-if="activeTab==='private'">
-        <book-grid :type="activeTab"></book-grid>
+        <book-grid :type="activeTab" :books="books"></book-grid>
         <mu-float-button icon="add" secondary class="addBookBtn" ref="button" @click="toggle"/>
         <mu-popover :trigger="trigger" :open="open" @close="handleClose" :anchorOrigin="{vertical:'top',horizontal:'left'}">
          <mu-menu>
@@ -16,8 +16,8 @@
          </mu-menu>
         </mu-popover>
       </div>
-     <book-grid v-if="activeTab==='borrow'" :type="activeTab"></book-grid>
-     <book-grid v-if="activeTab==='lend'" :type="activeTab"></book-grid>
+     <book-grid v-if="activeTab==='borrow'" :type="activeTab" :books="borrowBook"></book-grid>
+     <book-grid v-if="activeTab==='lend'" :type="activeTab" :books="lendBook"></book-grid>
     </div>
   </div>
 </template>
@@ -36,10 +36,29 @@ export default {
       trigger: null
     }
   },
+  watch: {
+    'activeTab' (val) {
+      if (val) {
+        this.$store.dispatch('getUserBook', val)
+      }
+    }
+  },
+  computed: {
+    books () {
+      return this.$store.state.userBook && this.$store.state.userBook['private'] || []
+    },
+    lendBook () {
+      return this.$store.state.userBook && this.$store.state.userBook['lend'] || []
+    },
+    borrowBook () {
+      return this.$store.state.userBook && this.$store.state.userBook['borrow'] || []
+    }
+  },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
     this.trigger = this.$refs.button.$el
     this.$store.dispatch('getWechatConfig')
+    this.$store.dispatch('getUserBook')
   },
   methods: {
     handleTabChange (val) {
