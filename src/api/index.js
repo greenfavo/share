@@ -53,6 +53,6 @@ export default {
   },
   // 获取图书详情
   getBookInfo (id) {
-    return Vue.http.get(`${API}/book/${id}`)
+    return Vue.http.get(`${API}/book?bookId=${id}`)
   }
 }
