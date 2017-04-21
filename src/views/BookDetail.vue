@@ -30,7 +30,7 @@
     </div> -->
     <div class="detail">
       <div class="desc">
-        <img src="../assets/cover/2.jpg" class="cover"/>
+        <img :src="bookInfo.cover" class="cover"/>
         <ul class="mL20">
           <li>书名:{{bookInfo.name}}</li>
           <li>作者:{{bookInfo.author}}</li>
@@ -51,10 +51,11 @@
         <mu-icon value="location_on" />{{bookInfo.area}}
       </p>
       <div>简介:
-        {{showAll? bookInfo.summary : bookInfo.summary|sliceWord(50)}}
-        <mu-flat-button label="收起" primary
+        <p v-show="showAll">{{bookInfo.summary}}</p>
+        <p v-show="!showAll">{{bookInfo.summary|sliceWord(60)}}</p>
+        <mu-flat-button :label="showAll? '收起' : '展开'" primary
           v-if="bookInfo.summary.length>50"
-          @click="showAll=!showAll"
+          @click="showAll=!showAll" />
       </div><br/>
       <mu-raised-button label="借阅"  primary fullWidth />
     </div>
@@ -95,7 +96,9 @@ export default {
   },
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
-    this.$store.dispatch('getBookInfo', this.id)
+    if (!this.bookInfo) {
+      this.$store.dispatch('getBookInfo', this.id)
+    }
   }
 }
 </script>

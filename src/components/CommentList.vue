@@ -8,7 +8,7 @@
     </mu-list-item>
     <mu-list-item :title="item.userName" v-for="item in comments"
       :afterText="item.date|dateFormat">
-      <router-link :to="`/user/${comments.userId}`">
+      <router-link :to="`/user/${item.userId}`">
         <mu-avatar :src="item.headimgurl" slot="leftAvatar"/>
       </router-link>
       <span slot="describe">
@@ -37,6 +37,10 @@ export default {
   },
   methods: {
     handleComment () {
+      if (!this.content) {
+        this.$msg('info', '评论内容不能为空')
+        return
+      }
       this.disabled = true
       let opts = {
         bookId: this.$route.params.id,

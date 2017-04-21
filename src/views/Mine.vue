@@ -45,7 +45,9 @@ export default {
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    this.$store.dispatch('getUserInfo')
+    if (!this.$store.state.userInfo) {
+      this.$store.dispatch('getUserInfo')
+    }
   }
 }
 </script>
