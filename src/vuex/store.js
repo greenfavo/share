@@ -14,7 +14,8 @@ const state = {
     jsApiList: ['scanQRCode']
   },
   book: {}, // 扫码获取的图书
-  books: []
+  books: [], // 所有书籍
+  bookInfos: {} // 图书详情信息
 }
 
 const mutations = {
@@ -42,6 +43,10 @@ const mutations = {
   },
   SET_VERTIFY (state, isVertify) {
     state.vertify = isVertify
+  },
+  SET_BOOK_INFOS (state, book) {
+    Vue.set(state.bookInfos, book['_id'], book)
+    console.log('bookinfos: ', state.bookinfos)
   }
 }
 
@@ -83,6 +88,16 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_ALL_BOOKS', res.data)
+      } else {
+        throw new Error('fail')
+      }
+    })
+  },
+  getBookInfo ({ commit }, id) {
+    api.getBookInfo(id).then((res) => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('SET_BOOK_INFOS', res.data)
       } else {
         throw new Error('fail')
       }

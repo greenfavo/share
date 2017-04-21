@@ -50,5 +50,9 @@ export default {
   // 取消校园认证
   cancleVertify () {
     return Vue.http.delete(`${API}/cert`)
+  },
+  // 获取图书详情
+  getBookInfo (id) {
+    return Vue.http.get(`${API}/book/${id}`)
   }
 }

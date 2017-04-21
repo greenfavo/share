@@ -26,7 +26,7 @@ export default new Router({
       component: resolve => require(['../views/Mine'], resolve)
     },
     {
-      path: '/user',
+      path: '/user/:id',
       component: resolve => require(['../views/HomePage'], resolve)
     },
     {

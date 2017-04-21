@@ -11,8 +11,8 @@
         <mu-float-button icon="add" secondary class="addBookBtn" ref="button" @click="toggle"/>
         <mu-popover :trigger="trigger" :open="open" @close="handleClose" :anchorOrigin="{vertical:'top',horizontal:'left'}">
          <mu-menu>
-           <mu-menu-item title="手动添加" href="#/addBook"/>
            <mu-menu-item title="扫码添加" @click="handleScan"/>
+           <mu-menu-item title="手动添加" href="#/addBook"/>
          </mu-menu>
         </mu-popover>
       </div>

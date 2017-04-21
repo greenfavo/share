@@ -3,16 +3,15 @@
     <mu-sub-header>评论</mu-sub-header>
     <mu-list-item >
       <mu-avatar :src="avatar" slot="leftAvatar"/>
-      <mu-text-field hintText="说点什么..."/>
+      <mu-text-field hintText="这本书好看吗"/>
       <mu-icon-button icon="send" slot="right"></mu-icon-button>
     </mu-list-item>
-    <mu-list-item :title="item.name" v-for="item in comments" afterText="2017-01-22">
+    <mu-list-item :title="item.name" v-for="item in comments" :afterText="1492761850609|dateFormat">
       <mu-avatar :src="item.avatar" slot="leftAvatar"/>
       <span slot="describe">
         {{item.content}}
       </span>
-      <!-- <span slot="right" class="time">2016-11-15</span> -->
-      <mu-radio slot="right" uncheckIcon="favorite_border" checkedIcon="favorite" v-model="item.isAgree"></mu-radio>
+      <!-- <mu-radio slot="right" uncheckIcon="favorite_border" checkedIcon="favorite" v-model="item.isAgree"></mu-radio> -->
     </mu-list-item>
   </mu-list>
 </template>
@@ -22,6 +21,8 @@ import avatar1 from '../assets/cover/1.jpg'
 import avatar2 from '../assets/cover/2.jpg'
 import avatar3 from '../assets/cover/3.jpg'
 import avatar4 from '../assets/cover/4.jpg'
+import { dateFormat } from '../utils'
+
 export default {
   data () {
     return {
@@ -53,8 +54,10 @@ export default {
         }
       ]
     }
+  },
+  filters: {
+    dateFormat
   }
-
 }
 </script>
 <style scoped>

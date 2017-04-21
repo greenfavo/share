@@ -29,7 +29,7 @@ li{
   color: gray;
 }
 .cover {
-  width: 100px;
+  width: 110px;
   height: 150px;
 }
 a {
@@ -86,14 +86,10 @@ li {
   text-align: center;
   line-height: 24px;
 }
-.ellipsis {
-  width: 300px;
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+.location {
+  display: flex;
+  align-items: center;
+  color: gray
 }
 /*-----toast插件--------------------*/
 .toast {
