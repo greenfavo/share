@@ -2,7 +2,7 @@
   <mu-list>
     <mu-sub-header>评论</mu-sub-header>
     <mu-list-item >
-      <mu-avatar :src="avatar" slot="leftAvatar"/>
+      <mu-avatar :src="loginUser.headimgurl" slot="leftAvatar"/>
       <mu-text-field hintText="这本书好看吗" v-model="content"/>
       <mu-icon-button icon="send" slot="right" @click="handleComment" :disabled="disabled"/>
     </mu-list-item>
@@ -31,6 +31,11 @@ export default {
   },
   props: {
     comments: Array
+  },
+  computed: {
+    loginUser () {
+      return this.$store.state.userInfo || {}
+    }
   },
   filters: {
     dateFormat

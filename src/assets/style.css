@@ -91,6 +91,10 @@ li {
   align-items: center;
   color: gray
 }
+.flex {
+  display: flex;
+  align-items: center;
+}
 /*-----toast插件--------------------*/
 .toast {
   width: 80vw;

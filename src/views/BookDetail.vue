@@ -50,8 +50,10 @@
       <p class="location">
         <mu-icon value="location_on" />{{bookInfo.area}}
       </p>
-      <div>简介:
-        {{showAll? bookInfo.summary : bookInfo.summary|sliceWord(70)}}
+      简介:
+      <div class="flex">
+        <p v-show="showAll">{{bookInfo.summary}}</p>
+        <p v-show="!showAll">{{bookInfo.summary|sliceWord(70)}}</p>
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
           v-if="bookInfo.summary.length>70"
           @click="showAll=!showAll" />
@@ -95,7 +97,7 @@ export default {
   },
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
-    if (!this.bookInfo) {
+    if (!this.bookInfo.name) {
       this.$store.dispatch('getBookInfo', this.id)
     }
   }
