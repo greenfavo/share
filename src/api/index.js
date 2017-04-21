@@ -54,5 +54,9 @@ export default {
   // 获取图书详情
   getBookInfo (id) {
     return Vue.http.get(`${API}/book?bookId=${id}`)
+  },
+  // 添加图书评论
+  addComment (opts) {
+    return Vue.http.post(`${API}/comment`, opts)
   }
 }

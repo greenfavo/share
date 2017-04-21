@@ -3,60 +3,58 @@
     <mu-sub-header>评论</mu-sub-header>
     <mu-list-item >
       <mu-avatar :src="avatar" slot="leftAvatar"/>
-      <mu-text-field hintText="这本书好看吗"/>
-      <mu-icon-button icon="send" slot="right"></mu-icon-button>
+      <mu-text-field hintText="这本书好看吗" v-model="content"/>
+      <mu-icon-button icon="send" slot="right" @click="handleComment" :disabled="disabled"/>
     </mu-list-item>
-    <mu-list-item :title="item.name" v-for="item in comments" :afterText="1492761850609|dateFormat">
-      <mu-avatar :src="item.avatar" slot="leftAvatar"/>
+    <mu-list-item :title="item.userName" v-for="item in comments"
+      :afterText="item.date|dateFormat">
+      <router-link :to="`/user/${comments.userId}`">
+        <mu-avatar :src="item.headimgurl" slot="leftAvatar"/>
+      </router-link>
       <span slot="describe">
         {{item.content}}
       </span>
-      <!-- <mu-radio slot="right" uncheckIcon="favorite_border" checkedIcon="favorite" v-model="item.isAgree"></mu-radio> -->
     </mu-list-item>
+    <mu-list-item v-if="comments.length === 0">暂无评论</mu-list-item>
   </mu-list>
 </template>
 
 <script>
-import avatar1 from '../assets/cover/1.jpg'
-import avatar2 from '../assets/cover/2.jpg'
-import avatar3 from '../assets/cover/3.jpg'
-import avatar4 from '../assets/cover/4.jpg'
 import { dateFormat } from '../utils'
+import api from '../api'
 
 export default {
   data () {
     return {
-      avatar: avatar1,
-      comments: [
-        {
-          avatar: avatar1,
-          name: '小明',
-          content: '写的真好,非常棒,剧情跌宕起伏,细节描写很好,男女主角历尽千辛万苦终于在一起了,赞',
-          isAgree: 'true'
-        },
-        {
-          avatar: avatar2,
-          name: '琳琳',
-          content: '抄袭的',
-          isAgree: 'false'
-        },
-        {
-          avatar: avatar3,
-          name: '拉拉',
-          content: '真不错',
-          isAgree: 'false'
-        },
-        {
-          avatar: avatar4,
-          name: '林瑾',
-          content: '很好',
-          isAgree: 'false'
-        }
-      ]
+      disabled: false
     }
+  },
+  props: {
+    comments: Array
   },
   filters: {
     dateFormat
+  },
+  methods: {
+    handleComment () {
+      this.disabled = true
+      let opts = {
+        bookId: this.$route.params.id,
+        content: this.content
+      }
+      api.addComment(opts).then((res) => {
+        res = res.body
+        if (res.result === 'ok') {
+          this.$msg('success', '评论成功！')
+          this.comments.unshift(res.data)
+        }
+        this.disabled = false
+      }, (error) => {
+        error = error.body
+        this.$msg('error', error.data)
+        this.disabled = false
+      })
+    }
   }
 }
 </script>

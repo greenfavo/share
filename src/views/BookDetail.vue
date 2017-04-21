@@ -22,7 +22,10 @@
       <p class="location">
         <mu-icon value="location_on" />南书院
       </p>
-      <div>简介:小王子作者圣埃克苏佩里的最后遗作</div><br/>
+      <div>
+        简介:小王子作者圣埃克苏佩里的最后遗作啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦零零落落啦啦啦啦啦啦啦啦
+        <mu-flat-button label="收起" primary @click="showAll=!showAll" mini/>
+      </div><br/>
       <mu-raised-button label="借阅"  primary fullWidth />
     </div> -->
     <div class="detail">
@@ -47,10 +50,15 @@
       <p class="location">
         <mu-icon value="location_on" />{{bookInfo.area}}
       </p>
-      <div>简介:{{bookInfo.summary}}</div><br/>
+      <div>简介:
+        {{showAll? bookInfo.summary : bookInfo.summary|sliceWord(50)}}
+        <mu-flat-button label="收起" primary
+          v-if="bookInfo.summary.length>50"
+          @click="showAll=!showAll"
+      </div><br/>
       <mu-raised-button label="借阅"  primary fullWidth />
     </div>
-    <comment-list class="comment"></comment-list>
+    <comment-list class="comment" :comments="bookInfo.comments" ></comment-list>
   </div>
 </template>
 
@@ -58,31 +66,30 @@
 import CommentList from '../components/CommentList'
 import BackNav from '../components/BackNav'
 // import Avatar from '../assets/cover/3.jpg'
+import { sliceWord } from '../utils'
 
 export default {
   data () {
     return {
       // avatar: Avatar,
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      showAll: false
     }
   },
   components: {
     CommentList,
     BackNav
   },
+  filters: {
+    sliceWord
+  },
   computed: {
     bookInfo () {
       let book = this.$store.state.bookInfos && this.$store.state.bookInfos[this.id]
       console.log('bookinfo ', book)
       if (book) {
+        this.$store.commit('SET_BACK_TITLE', book.name)
         return book
-      }
-    }
-  },
-  watch: {
-    'bookInfo' (val) {
-      if (val) {
-        this.$store.commit('SET_BACK_TITLE', this.bookInfo.name)
       }
     }
   },
