@@ -24,12 +24,8 @@ export default {
     return {
       username: '',
       password: '',
-      disabled: false
-    }
-  },
-  computed: {
-    isVertify () {
-      return getCookie('verify') || this.$store.state.vertify
+      disabled: false,
+      isVertify: getCookie('verify') || this.$store.state.vertify
     }
   },
   methods: {
@@ -46,6 +42,7 @@ export default {
         this.disabled = false
         res = res.body
         if (res.result === 'ok') {
+          this.isVertify = true
           this.$store.commit('SET_VERTIFY', true)
         } else {
           this.$msg('error', res.data)
@@ -59,6 +56,7 @@ export default {
       api.cancleVertify().then((res) => {
         res = res.body
         if (res.result === 'ok') {
+          this.isVertify = false
           this.$store.commit('SET_VERTIFY', false)
         } else {
           this.$msg('error', res.data)

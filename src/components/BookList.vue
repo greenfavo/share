@@ -57,7 +57,7 @@ export default {
       })
     },
     loadMore () {
-      let timestamp = this.books.slice(-1).timestamp
+      let timestamp = this.books.slice(-1)[0].timestamp
       this.loadData(timestamp)
     }
   }
