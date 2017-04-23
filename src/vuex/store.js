@@ -56,8 +56,8 @@ const mutations = {
 }
 
 const actions = {
-  getUserInfo ({ commit }) {
-    api.getUserInfo().then((res) => {
+  getUserInfo ({ commit }, userId = '') {
+    api.getUserInfo(userId).then((res) => {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_USER_INFO', res.data)
@@ -108,8 +108,8 @@ const actions = {
       }
     })
   },
-  getUserBook ({ commit, state }, type = '') {
-    api.getUserBook(state.userInfo['id'], type).then((res) => {
+  getUserBook ({ commit, state }, userId, type = '') {
+    api.getUserBook(userId, type).then((res) => {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_USER_BOOK', res.data, type)

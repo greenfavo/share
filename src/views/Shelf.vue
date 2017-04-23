@@ -24,6 +24,7 @@
 
 <script type="text/javascript">
 import BookGrid from '../components/BookGrid'
+import { getCookie } from '../utils'
 
 export default {
   components: {
@@ -44,6 +45,9 @@ export default {
     }
   },
   computed: {
+    userId () {
+      return getCookie('userId')
+    },
     books () {
       return this.$store.state.userBook && this.$store.state.userBook['private'] || []
     },
@@ -58,11 +62,12 @@ export default {
     this.$store.commit('SHOW_NAVBAR')
     this.trigger = this.$refs.button.$el
     this.$store.dispatch('getWechatConfig')
-    this.$store.dispatch('getUserBook')
+    this.$store.dispatch('getUserBook', this.userId)
   },
   methods: {
     handleTabChange (val) {
       this.activeTab = val
+      this.$store.dispatch('getUserBook', this.userId, val)
     },
     toggle () {
       this.open = !this.open

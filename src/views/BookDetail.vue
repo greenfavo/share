@@ -51,13 +51,19 @@
         <mu-icon value="location_on" />{{bookInfo.area}}
       </p>
       简介:
-      <div class="flex">
-        <p v-show="showAll">{{bookInfo.summary}}</p>
-        <p v-show="!showAll">{{bookInfo.summary|sliceWord(70)}}</p>
+      <div v-show="showAll">
+        {{bookInfo.summary}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
           v-if="bookInfo.summary.length>70"
           @click="showAll=!showAll" />
-      </div><br/>
+      </div>
+      <div v-show="!showAll">
+        {{bookInfo.summary|sliceWord(70)}}
+        <mu-flat-button :label="showAll? '收起' : '展开'" primary
+          v-if="bookInfo.summary.length>70"
+          @click="showAll=!showAll" />
+      </div>
+      <br/>
       <mu-raised-button label="借阅"  primary fullWidth />
     </div>
     <comment-list class="comment" :comments="bookInfo.comments" ></comment-list>

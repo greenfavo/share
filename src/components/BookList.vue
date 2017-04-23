@@ -11,7 +11,7 @@
         <ul class="mL20">
           <li><b>{{item.name}}</b></li>
           <li class="light">{{item.author}}</li>
-          <li class="light">{{item.summary|sliceWord(44)}}</li>
+          <li class="light">{{item.summary|sliceWord(50)}}</li>
           <p class="location">
             <mu-icon value="location_on" />{{item.area}}
           </p>

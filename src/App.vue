@@ -2,9 +2,7 @@
   <div id="app">
     <top-bar v-show="isShowNavBar"></top-bar>
     <back-nav v-show="!isShowNavBar"></back-nav>
-    <!-- <transition name="fade"> -->
-      <router-view></router-view>
-    <!-- </transition> -->
+    <router-view></router-view>
     <bottom-bar v-show="isShowNavBar"></bottom-bar>
   </div>
 </template>

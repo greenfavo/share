@@ -1,15 +1,14 @@
 <template>
   <div class="gridlist-demo-container">
-    <mu-grid-list class="gridlist-demo">
-      <mu-grid-tile v-for="item in books" v-if="books.length>0">
-        <img :src="item.image"  @click="openBottomSheet(item)"/>
+    <mu-grid-list class="gridlist-demo" v-if="books.length>0">
+      <mu-grid-tile v-for="item in books" >
+        <img :src="item.cover"  @click="openBottomSheet(item)" class="cover" />
         <span slot="title">{{item.name}}</span>
         <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
         <span slot="subTitle" v-else>应还日期:04-25</span>
       </mu-grid-tile>
-      <p v-else>暂无图书</p>
     </mu-grid-list>
-
+    <p v-else>暂无图书</p>
     <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
       <mu-list @itemClick="closeBottomSheet">
         <mu-sub-header>
@@ -25,31 +24,9 @@
 </template>
 
 <script>
-// import breakfast from '../assets/cover/1.jpg'
-// import burger from '../assets/cover/2.jpg'
-// import camera from '../assets/cover/3.jpg'
-// import hats from '../assets/cover/4.jpg'
-
 export default {
   data () {
     return {
-      // list: [{
-      //   image: breakfast,
-      //   title: '是你路过我的倾城时光',
-      //   author: 'Myron'
-      // }, {
-      //   image: burger,
-      //   title: 'Burger',
-      //   author: 'Linyu'
-      // }, {
-      //   image: camera,
-      //   title: 'Camera',
-      //   author: 'ruolin'
-      // }, {
-      //   image: hats,
-      //   title: 'Hats',
-      //   author: 'kakali'
-      // }],
       bottomSheet: false,
       curId: ''
     }

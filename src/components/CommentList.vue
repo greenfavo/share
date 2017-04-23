@@ -2,7 +2,7 @@
   <mu-list>
     <mu-sub-header>评论</mu-sub-header>
     <mu-list-item >
-      <mu-avatar :src="loginUser.headimgurl" slot="leftAvatar"/>
+      <mu-avatar :src="loginUserAvatar" slot="leftAvatar"/>
       <mu-text-field hintText="这本书好看吗" v-model="content"/>
       <mu-icon-button icon="send" slot="right" @click="handleComment" :disabled="disabled"/>
     </mu-list-item>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { dateFormat } from '../utils'
+import { dateFormat, getCookie } from '../utils'
 import api from '../api'
 
 export default {
@@ -33,8 +33,8 @@ export default {
     comments: Array
   },
   computed: {
-    loginUser () {
-      return this.$store.state.userInfo || {}
+    loginUserAvatar () {
+      return getCookie('headimgurl')
     }
   },
   filters: {
@@ -55,6 +55,7 @@ export default {
         res = res.body
         if (res.result === 'ok') {
           this.$msg('success', '评论成功！')
+          this.content = ''
           this.comments.unshift(res.data)
         }
         this.disabled = false

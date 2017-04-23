@@ -15,8 +15,8 @@ export default {
     })
   },
   // 获取用户信息
-  getUserInfo () {
-    return Vue.http.get(`${API}/userinfo`)
+  getUserInfo (userId = '') {
+    return Vue.http.get(`${API}/userinfo?userId=${userId}`)
   },
   // 上传文件
   upload (opts) {

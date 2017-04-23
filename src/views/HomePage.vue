@@ -1,9 +1,12 @@
 <template>
   <div>
-    <person-cover />
+    <person-cover
+      :nickname="userInfo.nickname"
+      :avatar="userInfo.headimgurl"
+      :score="userInfo.score || 100"/>
     <div class="main">
-      <h2>TA的闲置图书</h2>
-      <book-grid></book-grid>
+      <h2>TA的可借图书</h2>
+      <book-grid :type="private" :books="books"></book-grid>
     </div>
   </div>
 </template>
@@ -17,9 +20,23 @@ export default {
     PersonCover,
     BookGrid
   },
+  computed: {
+    userId () {
+      return this.$route.params.id
+    },
+    userInfo () {
+      return this.$store.state.userInfo || {}
+    },
+    books () {
+      return this.$store.state.userBook && this.$store.state.userBook['private'] || []
+    }
+  },
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
-    this.$store.commit('SET_BACK_TITLE', '小书童')
+    this.$store.dispatch('getUserInfo', this.userId).then(() => {
+      this.$store.commit('SET_BACK_TITLE', this.$store.state.userInfo.nickname)
+    })
+    this.$store.dispatch('getUserBook', this.userId)
   }
 }
 </script>

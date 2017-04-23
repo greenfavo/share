@@ -14,7 +14,10 @@ export default {
   props: {
     nickname: String,
     avatar: String,
-    score: Number
+    score: {
+      type: Number,
+      default: 100
+    }
   }
 }
 </script>
