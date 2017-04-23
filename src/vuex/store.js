@@ -16,7 +16,8 @@ const state = {
   book: {}, // 扫码获取的图书
   books: [], // 所有书籍
   bookInfos: {}, // 图书详情信息
-  userBook: {}
+  userBook: {},
+  messages: []
 }
 
 const mutations = {
@@ -52,6 +53,9 @@ const mutations = {
   GET_USER_BOOK (state, book, type) {
     type = type || 'private'
     Vue.set(state.userBook, type, book)
+  },
+  GET_MESSAGE (state, msg) {
+    state.message = msg
   }
 }
 
@@ -113,6 +117,14 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_USER_BOOK', res.data, type)
+      }
+    })
+  },
+  getMessage ({ commit }) {
+    api.getMessage().then(res => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('GET_MESSAGE', res.data)
       }
     })
   }

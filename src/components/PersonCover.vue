@@ -1,7 +1,7 @@
 <template>
   <div class="personInfo">
     <img src="http://onzj7fisz.bkt.clouddn.com/cover.webp" alt="" />
-    <mu-flat-button :label="`信用积分:${score}`" icon="navigate_next" labelPosition="before" class="score" />
+    <mu-flat-button :label="`信用积分:${score}`" class="score" />
     <div class="avatar">
       <mu-avatar :src="avatar" :size="60"/>
       <span>{{nickname}}</span>

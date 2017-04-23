@@ -25,7 +25,11 @@ export default {
       return this.$route.params.id
     },
     userInfo () {
-      return this.$store.state.userInfos && this.$store.state.userInfos[this.userId]
+      let userInfo = this.$store.state.userInfos && this.$store.state.userInfos[this.userId]
+      if (userInfo) {
+        this.$store.commit('SET_BACK_TITLE', userInfo.nickname)
+      }
+      return userInfo
     },
     books () {
       return this.$store.state.userBook && this.$store.state.userBook['private'] || []
@@ -34,9 +38,7 @@ export default {
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
     if (!this.$store.state.userInfos[this.userId]) {
-      this.$store.dispatch('getUserInfo', this.userId).then(() => {
-        this.$store.commit('SET_BACK_TITLE', this.$store.state.userInfos[this.userId].nickname)
-      })
+      this.$store.dispatch('getUserInfo', this.userId)
     }
     this.$store.dispatch('getUserBook', this.userId)
   }

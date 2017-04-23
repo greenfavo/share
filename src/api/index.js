@@ -8,7 +8,7 @@ const API = '/api'
 export default {
   // 添加图书
   addBook (opts) {
-    return Vue.http.post('/api/book', opts, {
+    return Vue.http.post(`${API}/book`, opts, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -66,5 +66,9 @@ export default {
   // 申请借阅
   applyBorrow (bookId) {
     return Vue.http.post(`${API}/propose/${bookId}`)
+  },
+  // 获取消息列表
+  getMessage () {
+    return Vue.http.get(`${API}/proposes`)
   }
 }

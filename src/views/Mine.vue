@@ -30,12 +30,16 @@
 
 <script>
 import PersonCover from '../components/PersonCover'
+import { getCookie } from '../utils'
 
 export default {
   components: {
     PersonCover
   },
   computed: {
+    userId () {
+      return getCookie('userId') || ''
+    },
     userInfo () {
       let userInfo = this.$store.state.userInfo || {}
       if (userInfo) {
@@ -45,7 +49,7 @@ export default {
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    if (!this.$store.state.userInfo.nickname) {
+    if (!this.$store.state.userInfos[this.userId].nickname) {
       this.$store.dispatch('getUserInfo')
     }
   }

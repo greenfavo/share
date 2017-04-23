@@ -2,11 +2,11 @@
   <mu-dialog :open="dialog" title="有人想借你的书" @close="close" slot="title">
     <!-- 借阅卡片 -->
     <mu-card slot="default">
-      <mu-card-header title="小明" subTitle="申请人">
-        <mu-avatar :src="avatar" slot="avatar"/>
+      <mu-card-header :title="borrowUserName" subTitle="申请人">
+        <mu-avatar :src="borrowUserHead" slot="avatar"/>
       </mu-card-header>
-      <mu-card-media title="白夜行" subTitle="东野圭吾">
-        <img src="../assets/cover/3.jpg" />
+      <mu-card-media :title="borrowBookName" :subTitle="borrowBookAuthor">
+        <img :src="borrowBookCover" />
       </mu-card-media>
     </mu-card>
 
@@ -15,17 +15,14 @@
   </mu-dialog>
 </template>
 <script type="text/javascript">
-import Avatar from '../assets/cover/1.jpg'
-
 export default {
-  data () {
-    return {
-      avatar: Avatar
-    }
-  },
   props: {
     dialog: {
       type: Boolean,
+      required: true
+    },
+    info: {
+      type: Object,
       required: true
     }
   },

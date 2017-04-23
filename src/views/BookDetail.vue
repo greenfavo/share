@@ -56,7 +56,7 @@ export default {
     return {
       id: this.$route.params.id,
       showAll: false,
-      btnTxt: '确定',
+      btnTxt: '借阅',
       disabled: false
     }
   },
