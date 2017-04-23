@@ -41,16 +41,13 @@ export default {
       return getCookie('userId') || ''
     },
     userInfo () {
-      let userInfo = this.$store.state.userInfo || {}
-      if (userInfo) {
-        return userInfo
-      }
+      return this.$store.state.userInfos && this.$store.state.userInfos[this.userId]
     }
   },
   mounted () {
     this.$store.commit('SHOW_NAVBAR')
-    if (!this.$store.state.userInfos[this.userId].nickname) {
-      this.$store.dispatch('getUserInfo')
+    if (!this.$store.state.userInfos[this.userId]) {
+      this.$store.dispatch('getUserInfo', this.userId)
     }
   }
 }

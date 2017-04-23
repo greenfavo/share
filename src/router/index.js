@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { getCookie } from '../utils'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       name: 'explore',
@@ -14,7 +15,8 @@ export default new Router({
     {
       name: 'shelf',
       path: '/shelf',
-      component: resolve => require(['../views/Shelf'], resolve)
+      component: resolve => require(['../views/Shelf'], resolve),
+      meta: { vertify: true }
     },
     {
       path: '/book/:id',
@@ -23,7 +25,8 @@ export default new Router({
     {
       name: 'mine',
       path: '/mine',
-      component: resolve => require(['../views/Mine'], resolve)
+      component: resolve => require(['../views/Mine'], resolve),
+      meta: { vertify: true }
     },
     {
       path: '/user/:id',
@@ -31,11 +34,13 @@ export default new Router({
     },
     {
       path: '/notify',
-      component: resolve => require(['../views/Notify'], resolve)
+      component: resolve => require(['../views/Notify'], resolve),
+      meta: { vertify: true }
     },
     {
       path: '/addBook',
-      component: resolve => require(['../views/AddBook'], resolve)
+      component: resolve => require(['../views/AddBook'], resolve),
+      meta: { vertify: true }
     },
     {
       path: '/search',
@@ -47,3 +52,21 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.vertify)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!getCookie('verify')) {
+      next({
+        path: '/vertify',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
+export default router
+

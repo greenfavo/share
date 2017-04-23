@@ -40,7 +40,7 @@ export default {
   watch: {
     'activeTab' (val) {
       if (val) {
-        this.$store.dispatch('getUserBook', this.userId, val)
+        this.$store.dispatch('getUserBook', {userId: this.userId, type: val})
       }
     }
   },
@@ -62,7 +62,7 @@ export default {
     this.$store.commit('SHOW_NAVBAR')
     this.trigger = this.$refs.button.$el
     this.$store.dispatch('getWechatConfig')
-    this.$store.dispatch('getUserBook', this.userId)
+    this.$store.dispatch('getUserBook', {userId: this.userId})
   },
   methods: {
     handleTabChange (val) {

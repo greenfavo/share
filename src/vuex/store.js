@@ -50,7 +50,7 @@ const mutations = {
     Vue.set(state.bookInfos, book['_id'], book)
     console.log('bookinfos: ', state.bookinfos)
   },
-  GET_USER_BOOK (state, book, type) {
+  GET_USER_BOOK (state, {book, type}) {
     type = type || 'private'
     Vue.set(state.userBook, type, book)
   },
@@ -110,11 +110,11 @@ const actions = {
       }
     })
   },
-  getUserBook ({ commit, state }, userId, type = '') {
+  getUserBook ({ commit, state }, {userId, type = ''}) {
     api.getUserBook(userId, type).then((res) => {
       res = res.body
       if (res.result === 'ok') {
-        commit('GET_USER_BOOK', res.data, type)
+        commit('GET_USER_BOOK', {book: res.data, type})
       }
     })
   },

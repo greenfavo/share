@@ -13,6 +13,7 @@
 </template>
 <script>
 import api from '../api'
+import { getCookie } from '../utils'
 
 export default {
   mounted () {
@@ -28,7 +29,7 @@ export default {
   },
   computed: {
     isVertify () {
-      return this.$store.state.vertify || false
+      return getCookie('verify') || this.$store.state.vertify
     }
   },
   methods: {
