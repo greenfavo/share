@@ -64,7 +64,8 @@
           @click="showAll=!showAll" />
       </div>
       <br/>
-      <mu-raised-button label="借阅"  primary fullWidth />
+      <mu-raised-button :label="btnTxt"  primary fullWidth
+        @click="handleBorrow" :disabled="disabled"/>
     </div>
     <comment-list class="comment" :comments="bookInfo.comments" ></comment-list>
   </div>
@@ -75,13 +76,16 @@ import CommentList from '../components/CommentList'
 import BackNav from '../components/BackNav'
 // import Avatar from '../assets/cover/3.jpg'
 import { sliceWord } from '../utils'
+import api from '../api'
 
 export default {
   data () {
     return {
       // avatar: Avatar,
       id: this.$route.params.id,
-      showAll: false
+      showAll: false,
+      btnTxt: '确定',
+      disabled: false
     }
   },
   components: {
@@ -94,7 +98,6 @@ export default {
   computed: {
     bookInfo () {
       let book = this.$store.state.bookInfos && this.$store.state.bookInfos[this.id]
-      console.log('bookinfo ', book)
       if (book) {
         this.$store.commit('SET_BACK_TITLE', book.name)
         return book
@@ -104,6 +107,24 @@ export default {
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.dispatch('getBookInfo', this.id)
+  },
+  methods: {
+    handleBorrow () {
+      this.disabled = true
+      api.applyBorrow(this.id).then(res => {
+        res = res.body
+        if (res.result === 'ok') {
+          this.$msg('success', '你的借阅申请已发送给图书主人')
+          this.btnTxt = '借阅申请中...'
+        } else {
+          this.$msg('error', '请求出错，请重试')
+          this.disabled = false
+        }
+      }, (error) => {
+        this.$msg('error', error.body.data)
+        this.disabled = false
+      })
+    }
   }
 }
 </script>

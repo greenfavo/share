@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const state = {
   isShowNavBar: true, // 是否显示导航栏
   backTitle: '返回', // 后退按钮标题
-  userInfo: {},
+  userInfos: {},
   vertify: false,
   wechatConfig: {
     debug: false,
@@ -29,8 +29,8 @@ const mutations = {
   SET_BACK_TITLE (state, title) {
     state.backTitle = title
   },
-  GET_USER_INFO (state, userInfo) {
-    state.userInfo = userInfo
+  GET_USER_INFOS (state, userInfo) {
+    Vue.set(state.userInfos, userInfo.id, userInfo)
   },
   GET_WECHAT_CONFIG (state, config) {
     state.wechatConfig = Object.assign({}, state.wechatConfig, config)
@@ -60,7 +60,7 @@ const actions = {
     api.getUserInfo(userId).then((res) => {
       res = res.body
       if (res.result === 'ok') {
-        commit('GET_USER_INFO', res.data)
+        commit('GET_USER_INFOS', res.data)
       } else {
         console.log(res.data)
       }

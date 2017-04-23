@@ -62,5 +62,9 @@ export default {
   // 获取某个用户的图书
   getUserBook (userId, type = '') {
     return Vue.http.get(`${API}/books/user/${userId}?type=${type}`)
+  },
+  // 申请借阅
+  applyBorrow (bookId) {
+    return Vue.http.post(`${API}/propose/${bookId}`)
   }
 }

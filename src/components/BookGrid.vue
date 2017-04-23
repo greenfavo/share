@@ -5,7 +5,7 @@
         <img :src="item.cover"  @click="openBottomSheet(item)" class="cover" />
         <span slot="title">{{item.name}}</span>
         <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
-        <span slot="subTitle" v-else>应还日期:04-25</span>
+        <span slot="subTitle" v-else>应还日期:04-30</span>
       </mu-grid-tile>
     </mu-grid-list>
     <p v-else>暂无图书</p>
