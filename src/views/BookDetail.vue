@@ -26,13 +26,13 @@
       <div v-show="showAll">
         {{bookInfo.summary}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>75"
+          v-if="bookInfo.summary.length>65"
           @click="showAll=!showAll" />
       </div>
       <div v-show="!showAll">
-        {{bookInfo.summary|sliceWord(75)}}
+        {{bookInfo.summary|sliceWord(65)}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>75"
+          v-if="bookInfo.summary.length>65"
           @click="showAll=!showAll" />
       </div>
       <br/>

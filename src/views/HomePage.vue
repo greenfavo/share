@@ -6,7 +6,7 @@
       :score="userInfo.score || 100"/>
     <div class="main">
       <h2>TA的可借图书</h2>
-      <book-grid :type="private" :books="books"></book-grid>
+      <book-grid type="private" :books="books"></book-grid>
     </div>
   </div>
 </template>

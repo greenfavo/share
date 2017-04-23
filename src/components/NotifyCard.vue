@@ -2,11 +2,11 @@
   <mu-dialog :open="dialog" title="有人想借你的书" @close="close" slot="title">
     <!-- 借阅卡片 -->
     <mu-card slot="default">
-      <mu-card-header :title="borrowUserName" subTitle="申请人">
-        <mu-avatar :src="borrowUserHead" slot="avatar"/>
+      <mu-card-header :title="info.borrowUserName" subTitle="申请人">
+        <mu-avatar :src="info.borrowUserHead" slot="avatar"/>
       </mu-card-header>
-      <mu-card-media :title="borrowBookName" :subTitle="borrowBookAuthor">
-        <img :src="borrowBookCover" />
+      <mu-card-media :title="info.borrowBookName" :subTitle="info.borrowBookAuthor">
+        <img :src="info.borrowBookCover" />
       </mu-card-media>
     </mu-card>
 

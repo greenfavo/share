@@ -1,11 +1,11 @@
 <template>
   <div class="gridlist-demo-container">
     <mu-grid-list class="gridlist-demo" v-if="books.length>0">
-      <mu-grid-tile v-for="item in books" >
+      <mu-grid-tile v-for="item in books" cols="1" rows="1.5">
         <img :src="item.cover"  @click="openBottomSheet(item)"/>
         <span slot="title">{{item.name}}</span>
         <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
-        <span slot="subTitle" v-else>应还日期:04-30</span>
+        <span slot="subTitle" v-else>应还日期:{{item.date|dateFormat}}</span>
       </mu-grid-tile>
     </mu-grid-list>
     <p v-else>暂无图书</p>
@@ -16,7 +16,6 @@
         </mu-sub-header>
         <mu-list-item title="查看详情" :to="`/book/${curId}`" />
         <mu-list-item title="删除" v-if="type==='private'"/>
-        <mu-list-item title="编辑" v-if="type==='private'"/>
         <mu-list-item title="还书" v-if="type==='borrow'"/>
       </mu-list>
     </mu-bottom-sheet>
@@ -24,6 +23,8 @@
 </template>
 
 <script>
+import { dateFormat } from '../utils'
+
 export default {
   data () {
     return {
@@ -43,6 +44,9 @@ export default {
       this.bottomSheet = true
       this.curId = item['_id']
     }
+  },
+  filters: {
+    dateFormat
   }
 }
 </script>

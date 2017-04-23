@@ -97,8 +97,6 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_ALL_BOOKS', res.data)
-      } else {
-        throw new Error('fail')
       }
     })
   },
