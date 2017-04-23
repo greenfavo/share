@@ -1,15 +1,5 @@
 <template>
   <div class="">
-   <!--  <mu-list>
-      <mu-sub-header>私信列表</mu-sub-header>
-      <mu-list-item title="Mike Li" class="list" afterText="2016-01-22">
-        <mu-avatar :src="avatar" slot="leftAvatar"/>
-        <div slot="describe">
-          还有3天就要还书了,你看完了吗?
-        </div>
-      </mu-list-item>
-      <mu-divider />
-    </mu-list> -->
     <mu-list>
       <mu-sub-header>系统通知</mu-sub-header>
       <mu-list-item title="有人评论了你的书" class="list" describeText="2017-04-12">

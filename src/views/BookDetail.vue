@@ -1,33 +1,5 @@
 <template>
   <div class="mT20">
-    <!-- <div class="detail">
-      <div class="desc">
-        <img src="../assets/cover/2.jpg" class="cover"/>
-        <ul class="mL20">
-          <li>书名:要塞</li>
-          <li>作者:[法]圣埃克苏佩里</li>
-          <li>译者: 张扬</li>
-          <li>ISBN:123454786</li>
-          <li>出版社: 新华出版社</li>
-          <li >
-            <span class="userName">
-              主人:
-            </span>
-            <router-link to="/user/2131">
-              <mu-avatar :src="avatar" :size="30"/>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-      <p class="location">
-        <mu-icon value="location_on" />南书院
-      </p>
-      <div>
-        简介:小王子作者圣埃克苏佩里的最后遗作啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦零零落落啦啦啦啦啦啦啦啦
-        <mu-flat-button label="收起" primary @click="showAll=!showAll" mini/>
-      </div><br/>
-      <mu-raised-button label="借阅"  primary fullWidth />
-    </div> -->
     <div class="detail">
       <div class="desc">
         <img :src="bookInfo.cover" class="cover"/>
@@ -54,18 +26,20 @@
       <div v-show="showAll">
         {{bookInfo.summary}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>70"
+          v-if="bookInfo.summary.length>75"
           @click="showAll=!showAll" />
       </div>
       <div v-show="!showAll">
-        {{bookInfo.summary|sliceWord(70)}}
+        {{bookInfo.summary|sliceWord(75)}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>70"
+          v-if="bookInfo.summary.length>75"
           @click="showAll=!showAll" />
       </div>
       <br/>
       <mu-raised-button :label="btnTxt"  primary fullWidth
-        @click="handleBorrow" :disabled="disabled"/>
+        v-show="!isOwner"
+        @click="handleBorrow"
+        :disabled="disabled"/>
     </div>
     <comment-list class="comment" :comments="bookInfo.comments" ></comment-list>
   </div>
@@ -74,14 +48,12 @@
 <script type="text/javascript">
 import CommentList from '../components/CommentList'
 import BackNav from '../components/BackNav'
-// import Avatar from '../assets/cover/3.jpg'
-import { sliceWord } from '../utils'
+import { sliceWord, getCookie } from '../utils'
 import api from '../api'
 
 export default {
   data () {
     return {
-      // avatar: Avatar,
       id: this.$route.params.id,
       showAll: false,
       btnTxt: '确定',
@@ -102,6 +74,9 @@ export default {
         this.$store.commit('SET_BACK_TITLE', book.name)
         return book
       }
+    },
+    isOwner () {
+      return this.bookInfo.ownerId === getCookie('userId')
     }
   },
   mounted () {

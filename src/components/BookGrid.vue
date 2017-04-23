@@ -2,7 +2,7 @@
   <div class="gridlist-demo-container">
     <mu-grid-list class="gridlist-demo" v-if="books.length>0">
       <mu-grid-tile v-for="item in books" >
-        <img :src="item.cover"  @click="openBottomSheet(item)" class="cover" />
+        <img :src="item.cover"  @click="openBottomSheet(item)"/>
         <span slot="title">{{item.name}}</span>
         <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
         <span slot="subTitle" v-else>应还日期:04-30</span>

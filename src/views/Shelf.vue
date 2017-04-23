@@ -40,7 +40,7 @@ export default {
   watch: {
     'activeTab' (val) {
       if (val) {
-        this.$store.dispatch('getUserBook', val)
+        this.$store.dispatch('getUserBook', this.userId, val)
       }
     }
   },
@@ -67,7 +67,6 @@ export default {
   methods: {
     handleTabChange (val) {
       this.activeTab = val
-      this.$store.dispatch('getUserBook', this.userId, val)
     },
     toggle () {
       this.open = !this.open
