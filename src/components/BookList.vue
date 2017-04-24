@@ -47,11 +47,9 @@ export default {
   },
   methods: {
     loadData (timestamp = '') {
-      this.$store.dispatch('getBooks', timestamp).then(() => {
-        this.loading = false
-      }, (error) => {
-        console.log(error)
-        if (error || error.body.data === '没有更多图书了') {
+      this.$store.dispatch('getBooks', timestamp).then((res) => {
+        console.log(res)
+        if (res.data === '没有更多图书了') {
           this.showMore = false
         }
         this.loading = false
@@ -59,7 +57,6 @@ export default {
     },
     loadMore () {
       let timestamp = this.books.slice(-1)[0].date
-      console.log(timestamp)
       this.loadData(timestamp)
     }
   }
