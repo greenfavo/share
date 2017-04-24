@@ -9,10 +9,8 @@
         <img :src="info.book.cover" class="cover" />
       </mu-card-media>
     </mu-card>
-    <template v-if="showBtns">
-      <mu-raised-button slot="actions" @click="close('false')"  label="拒绝"/>
-      <mu-raised-button slot="actions" primary @click="close('true')" label="同意"/>
-    </template>
+    <mu-raised-button v-if="showBtns" slot="actions" @click="close('false')"  label="拒绝"/>
+    <mu-raised-button v-if="showBtns" slot="actions" primary @click="close('true')" label="同意"/>
     <mu-raised-button v-if="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
   </mu-dialog>
 </template>
@@ -50,7 +48,7 @@ export default {
       }
       console.log('reply= ', reply)
       if (reply !== 'true' || reply !== 'false') {
-        this.$emit('close')
+        this.$emit('close', {reply: ''})
         return
       }
       api.handleMessage(opts).then(res => {
