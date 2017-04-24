@@ -1,10 +1,10 @@
 <template>
   <div class="main">
-    <p>共找到4条和<strong>{{this.searchTxt}}</strong>相关的图书</p>
-    <section  v-for="item in books">
+    <p>共找到{{books.length || 0}}条和<strong>{{this.searchTxt}}</strong>相关的图书</p>
+    <section  v-for="item in books" v-if="books.length>0">
       <router-link :to="`/book/${item['_id']}`" class="bookSec" tag="div">
         <img :src="item.cover" class="cover" />
-        <ul>
+        <ul class="mL20">
           <li><b>{{item.name}}</b></li>
           <li class="light">{{item.author}}</li>
           <li class="light">{{item.summary | sliceWord(55)}}</li>

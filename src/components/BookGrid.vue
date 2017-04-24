@@ -1,14 +1,17 @@
 <template>
-  <div class="gridlist-demo-container">
-    <mu-grid-list class="gridlist-demo" v-if="books.length>0">
-      <mu-grid-tile v-for="(item, index) in books" cols="1" rows="1.5">
-        <img :src="item.cover"  class="cover"
-          @click="openBottomSheet(item);curIndex=index"/>
-        <span slot="title">{{item.name}}</span>
-        <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
-        <span slot="subTitle" v-else>应还日期:{{item.date|dateFormat}}</span>
-      </mu-grid-tile>
-    </mu-grid-list>
+  <div class="cardList">
+    <div
+      v-if="books.length>0"
+      v-for="(item, index) in books" class="card">
+      <img :src="item.cover"  @click="openBottomSheet(item)"/>
+      <div class="desc">
+        <p class="title">{{item.name}}</p>
+        <p class="subTitle">
+          <span>{{item.author}}</span><br/>
+          <span v-if="type!=='private'">应还日期:{{item.date|dateFormat}}</span>
+        </p>
+      </div>
+    </div>
     <p v-else>暂无图书</p>
     <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
       <mu-list @itemClick="closeBottomSheet">
@@ -74,7 +77,7 @@ export default {
     returnBook () {
       let bookInfo = this.books[this.curIndex]
       let opts = {
-        receiverId: bookInfo.owerId,
+        receiverId: bookInfo.ownerId,
         type: '还书',
         bookId: bookInfo['_id']
       }
@@ -97,13 +100,29 @@ export default {
 </script>
 
 <style scoped>
-.gridlist-demo-container{
+.cardList{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: stretch;
 }
-img {
-  width: 200px;
-  height: 400px;
+.card {
+  position: relative;
+  margin-bottom: 5px;
+}
+.desc {
+  position: relative;
+  background-color: rgba(0,0,0,.4);
+  height: 60px;
+  padding: 0 4px;
+  margin-top: -80px;
+}
+.title {
+  color: white;
+}
+.subTitle {
+  font-size: 1pt;
+  margin-top: -11px;
+  color: #b6a9a9;
 }
 </style>
