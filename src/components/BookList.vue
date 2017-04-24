@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     books () {
-      let res = this.$store.stae.books || {}
+      let res = this.$store.state.books || {}
       console.log(res)
       if (res.result === 'ok') {
         return this.$store.state.books && this.$store.state.books.data || []
