@@ -2,14 +2,15 @@
   <div class="">
     <mu-list>
       <mu-list-item :title="item.title ||'有人想借你的书'" class="list"
-        v-for="item in messages"
-        @click="dialog=true;curMesssage=item" :describeText="item.date|dateFormat">
+        v-for="(item, index) in messages"
+        @click="dialog=true;curIndex=index"
+        :describeText="item.date|dateFormat">
         <mu-badge :content="item.type" primary slot="after"/>
       </mu-list-item>
       <mu-divider v-for="(item, index) in messages" v-if="index!==(messages.length-1)"/>
       <mu-list-item  v-if="messages.length===0">暂无消息</mu-list-item>
     </mu-list>
-    <notify-card :dialog="dialog" @close="dialog=false" :info="curMesssage"/>
+    <notify-card :dialog="dialog" @close="handleClose" :info="curMesssage"/>
   </div>
 </template>
 
@@ -21,19 +22,15 @@ export default {
   data () {
     return {
       dialog: false,
-      curMesssage: {}
-    }
-  },
-  watch: {
-    'curMesssage' (val) {
-      if (val) {
-        this.curMesssage = val
-      }
+      curIndex: 0
     }
   },
   computed: {
     messages () {
       return this.$store.state.messages || []
+    },
+    curMesssage () {
+      return this.messages[this.curIndex]
     }
   },
   filters: {
@@ -46,6 +43,14 @@ export default {
   },
   components: {
     NotifyCard
+  },
+  methods: {
+    handleClose ({ reply }) {
+      this.dialog = false
+      if (reply) {
+        this.$store.dispatch('getMessages')
+      }
+    }
   }
 }
 </script>

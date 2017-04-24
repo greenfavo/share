@@ -36,12 +36,10 @@ export default {
   computed: {
     books () {
       let res = this.$store.state.books || {}
-      console.log(res)
-      if (res.result === 'ok') {
-        return this.$store.state.books && this.$store.state.books.data || []
-      } else if (res.result === '没有更多图书了') {
+      if (res.result === '没有更多图书了') {
         this.showMore = false
       }
+      return this.$store.state.books && this.$store.state.books.data || []
     }
   },
   mounted () {

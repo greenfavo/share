@@ -1,6 +1,6 @@
 <template>
   <mu-dialog :open="dialog" :title="info.title" @close="close" slot="title">
-    <!-- 借阅卡片 -->
+    <!-- 消息详情卡片 -->
     <mu-card slot="default">
       <mu-card-header title="书友" :subTitle="info.organizer.nickname">
         <mu-avatar :src="info.organizer.headimgurl" slot="avatar"/>
@@ -9,11 +9,11 @@
         <img :src="info.book.cover" class="cover" />
       </mu-card-media>
     </mu-card>
-    <template v-if="info.type!=='借阅申请' || info.type!=='还书申请'">
+    <template v-if="showBtns">
       <mu-raised-button slot="actions" @click="close('false')"  label="拒绝"/>
       <mu-raised-button slot="actions" primary @click="close('true')" label="同意"/>
     </template>
-    <mu-raised-button v-else slot="actions" primary @click="close('false')" label="确定"/>
+    <mu-raised-button v-if="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
   </mu-dialog>
 </template>
 <script type="text/javascript">
@@ -30,6 +30,14 @@ export default {
       required: true
     }
   },
+  computed: {
+    showBtns () { // 显示两个按钮
+      if (this.info.type !== '借阅申请' || this.info.type !== '还书申请') {
+        return true
+      }
+      return false
+    }
+  },
   methods: {
     close (reply) {
       let opts = {
@@ -40,7 +48,9 @@ export default {
         date: this.info.date,
         reply
       }
-      if (!reply) {
+      console.log('reply= ', reply)
+      if (reply !== 'true' || reply !== 'false') {
+        this.$emit('close')
         return
       }
       api.handleMessage(opts).then(res => {
@@ -50,7 +60,7 @@ export default {
         } else {
           this.$msg('error', res.data)
         }
-        this.$emit('close')
+        this.$emit('close', {reply})
       }, (error) => {
         this.$msg('error', error.body.data)
       })
