@@ -86,7 +86,12 @@ export default {
   methods: {
     handleBorrow () {
       this.disabled = true
-      api.applyBorrow(this.id).then(res => {
+      let opts = {
+        receiverId: this.bookInfo.ownerId,
+        type: '借阅',
+        bookId: this.id
+      }
+      api.sendMessage(opts).then(res => {
         res = res.body
         if (res.result === 'ok') {
           this.$msg('success', '你的借阅申请已发送给图书主人')

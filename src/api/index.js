@@ -37,7 +37,7 @@ export default {
   },
   // 获取所有图书
   getBooks (timestamp = '') {
-    return Vue.http.get(`${API}/books`)
+    return Vue.http.get(`${API}/books?timestamp=${timestamp}`)
   },
   // 校园认证
   vertify (opts) {
@@ -64,11 +64,15 @@ export default {
     return Vue.http.get(`${API}/books/user/${userId}?type=${type}`)
   },
   // 申请借阅
-  applyBorrow (bookId) {
-    return Vue.http.post(`${API}/propose/${bookId}`)
-  },
+  // applyBorrow (bookId) {
+  //   return Vue.http.post(`${API}/propose/${bookId}`)
+  // },
   // 获取消息列表
   getMessage () {
     return Vue.http.get(`${API}/proposes`)
+  },
+  // 发送消息
+  sendMessage ({organizerId = '', receiverId, type, content = '', bookId}) {
+    return Vue.http.post(`${API}/message`, {organizerId, receiverId, type, content, bookId})
   }
 }
