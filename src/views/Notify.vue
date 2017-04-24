@@ -8,7 +8,7 @@
       <mu-list-item :title="item.title ||'有人想借你的书'" class="list"
         v-for="item in messages"
         @click="dialog=true;curMesssage=item" :describeText="item.date|dateFormat">
-        <mu-badge content="item.type" primary slot="after"/>
+        <mu-badge :content="item.type" primary slot="after"/>
       </mu-list-item>
       <mu-divider v-for="(item, index) in messages" v-if="index!==(messages.length-1)"/>
       <!-- <mu-list-item title="图书借阅申请中" class="list" describeText="2017-04-12">
@@ -33,6 +33,13 @@ export default {
     return {
       dialog: false,
       curMesssage: {}
+    }
+  },
+  watch: {
+    'curMesssage' (val) {
+      if (val) {
+        this.curMesssage = val
+      }
     }
   },
   computed: {
