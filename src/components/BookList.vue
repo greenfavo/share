@@ -35,8 +35,13 @@ export default {
   },
   computed: {
     books () {
-      console.log('books: ', this.$store.state.books)
-      return this.$store.state.books || []
+      let res = this.$store.stae.books || {}
+      console.log(res)
+      if (res.result === 'ok') {
+        return this.$store.state.books && this.$store.state.books.data || []
+      } else if (res.result === '没有更多图书了') {
+        this.showMore = false
+      }
     }
   },
   mounted () {
@@ -48,10 +53,6 @@ export default {
   methods: {
     loadData (timestamp = '') {
       this.$store.dispatch('getBooks', timestamp).then((res) => {
-        console.log(res)
-        if (res.data === '没有更多图书了') {
-          this.showMore = false
-        }
         this.loading = false
       })
     },

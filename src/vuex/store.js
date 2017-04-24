@@ -14,7 +14,10 @@ const state = {
     jsApiList: ['scanQRCode']
   },
   book: {}, // 扫码获取的图书
-  books: [], // 所有书籍
+  books: { // 所有书籍
+    result: 'ok',
+    data: []
+  },
   bookInfos: {}, // 图书详情信息
   userBook: {},
   messages: []
@@ -40,8 +43,13 @@ const mutations = {
   GET_BOOK_BY_ISBN (state, book) {
     state.book = book
   },
-  GET_ALL_BOOKS (state, books) {
-    state.books = [...state.books, ...books]
+  GET_ALL_BOOKS (state, res) {
+    if (res.result === 'ok') {
+      state.books.result = 'ok'
+      state.books.data = [...state.books.data, ...res.data]
+    } else {
+      state.books.result = res.data
+    }
   },
   SET_VERTIFY (state, isVertify) {
     state.vertify = isVertify
@@ -95,10 +103,7 @@ const actions = {
   getBooks ({ commit }, timestamp = '') {
     api.getBooks(timestamp).then((res) => {
       res = res.body
-      if (res.result === 'ok') {
-        commit('GET_ALL_BOOKS', res.data)
-      }
-      return res
+      commit('GET_ALL_BOOKS', res)
     })
   },
   getBookInfo ({ commit }, id) {
