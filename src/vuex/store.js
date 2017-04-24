@@ -41,7 +41,7 @@ const mutations = {
     state.book = book
   },
   GET_ALL_BOOKS (state, books) {
-    state.books = books
+    state.books = [...state.books, ...books]
   },
   SET_VERTIFY (state, isVertify) {
     state.vertify = isVertify
@@ -97,6 +97,8 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_ALL_BOOKS', res.data)
+      } else {
+        throw new Error(res.data)
       }
     })
   },

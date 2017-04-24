@@ -63,10 +63,6 @@ export default {
   getUserBook (userId, type = '') {
     return Vue.http.get(`${API}/books/user/${userId}?type=${type}`)
   },
-  // 申请借阅
-  // applyBorrow (bookId) {
-  //   return Vue.http.post(`${API}/propose/${bookId}`)
-  // },
   // 获取消息列表
   getMessages () {
     return Vue.http.get(`${API}/proposes`)
@@ -74,5 +70,11 @@ export default {
   // 发送消息
   sendMessage ({organizerId = '', receiverId, type, content = '', bookId}) {
     return Vue.http.post(`${API}/message`, {organizerId, receiverId, type, content, bookId})
+  },
+  // 处理消息
+  handleMessage ({bookId, organizerId, receiverId, type, date, reply}) {
+    return Vue.http.post(`${API}/message/process`, {
+      bookId, organizerId, receiverId, type, date, reply
+    })
   }
 }

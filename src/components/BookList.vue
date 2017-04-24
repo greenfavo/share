@@ -29,7 +29,7 @@ import { sliceWord } from '../utils'
 export default {
   data () {
     return {
-      loading: false,
+      loading: true,
       showMore: true
     }
   },
@@ -47,13 +47,14 @@ export default {
   },
   methods: {
     loadData (timestamp = '') {
-      this.loading = true
       this.$store.dispatch('getBooks', timestamp).then(() => {
         this.loading = false
       }, (error) => {
-        if (error.body.data === '没有更多图书了') {
+        console.log(error)
+        if (error || error.body.data === '没有更多图书了') {
           this.showMore = false
         }
+        this.loading = false
       })
     },
     loadMore () {
