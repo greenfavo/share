@@ -54,8 +54,8 @@ const mutations = {
     type = type || 'private'
     Vue.set(state.userBook, type, book)
   },
-  GET_MESSAGE (state, msg) {
-    state.message = msg
+  GET_MESSAGES (state, msg) {
+    state.messages = msg
   }
 }
 
@@ -118,11 +118,11 @@ const actions = {
       }
     })
   },
-  getMessage ({ commit }) {
-    api.getMessage().then(res => {
+  getMessages ({ commit }) {
+    api.getMessages().then(res => {
       res = res.body
       if (res.result === 'ok') {
-        commit('GET_MESSAGE', res.data)
+        commit('GET_MESSAGES', res.data)
       }
     })
   }

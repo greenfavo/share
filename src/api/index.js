@@ -68,7 +68,7 @@ export default {
   //   return Vue.http.post(`${API}/propose/${bookId}`)
   // },
   // 获取消息列表
-  getMessage () {
+  getMessages () {
     return Vue.http.get(`${API}/proposes`)
   },
   // 发送消息

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { getCookie } from '../utils'
+import store from '../vuex/store'
 
 Vue.use(Router)
 
@@ -53,10 +54,11 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
+  let isVerify = getCookie('verify') || store.state.vertify
   if (to.matched.some(record => record.meta.vertify)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!getCookie('verify')) {
+    if (!isVerify) {
       next({
         path: '/vertify',
         query: { redirect: to.fullPath }

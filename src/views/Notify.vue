@@ -5,7 +5,7 @@
         <mu-badge content="评论" primary slot="after"/>
       </mu-list-item>
       <mu-divider /> -->
-      <mu-list-item title="有人想借你的书" class="list"
+      <mu-list-item :title="item.title ||'有人想借你的书'" class="list"
         v-for="item in messages"
         @click="dialog=true;curMesssage=item" :describeText="item.date|dateFormat">
         <mu-badge content="item.type" primary slot="after"/>
@@ -46,7 +46,7 @@ export default {
   mounted () {
     this.$store.commit('HIDDEN_NAVBAR')
     this.$store.commit('SET_BACK_TITLE', '新消息')
-    this.$store.dispatch('getMessage')
+    this.$store.dispatch('getMessages')
   },
   components: {
     NotifyCard
