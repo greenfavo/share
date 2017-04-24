@@ -10,7 +10,7 @@
       </mu-card-media>
     </mu-card>
     <template v-show="showBtns">
-      <mu-raised-button  slot="actions" @click="close('false')"  :label="info.type==='借阅'? '拒绝': '没还'"/>
+      <mu-raised-button  slot="actions" @click="close('false')"  :label="info.type==='借阅'? '拒绝': '未还'"/>
       <mu-raised-button  slot="actions" primary @click="close('true')" :label="info.type=='借阅'? '同意':'已还'"/>
     </template>
     <mu-raised-button v-show="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     showBtns () { // 显示两个按钮
-      if (this.info.type === '借阅申请' || this.info.type === '还书申请') {
+      if (this.info.type === '借阅' || this.info.type === '还书') {
         return true
       }
       return false
