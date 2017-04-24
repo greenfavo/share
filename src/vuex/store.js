@@ -20,7 +20,8 @@ const state = {
   },
   bookInfos: {}, // 图书详情信息
   userBook: {},
-  messages: []
+  messages: [],
+  searchBooks: []
 }
 
 const mutations = {
@@ -64,6 +65,9 @@ const mutations = {
   },
   GET_MESSAGES (state, msg) {
     state.messages = msg
+  },
+  GET_SEARCH_BOOKS (state, books) {
+    state.searchBooks = books
   }
 }
 
@@ -129,6 +133,14 @@ const actions = {
       res = res.body
       if (res.result === 'ok') {
         commit('GET_MESSAGES', res.data)
+      }
+    })
+  },
+  getSearchBooks ({ commit }, keyword) {
+    api.searchBook(keyword).then(res => {
+      res = res.body
+      if (res.result === 'ok') {
+        commit('GET_SEARCH_BOOKS', res.data)
       }
     })
   }

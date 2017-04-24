@@ -9,11 +9,11 @@
         <img :src="info.book.cover" class="cover" />
       </mu-card-media>
     </mu-card>
-    <template v-show="showBtns">
+    <template v-if="showBtns">
       <mu-raised-button  slot="actions" @click="close('false')"  :label="info.type==='借阅'? '拒绝': '未还'"/>
       <mu-raised-button  slot="actions" primary @click="close('true')" :label="info.type=='借阅'? '同意':'已还'"/>
     </template>
-    <mu-raised-button v-show="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
+    <mu-raised-button v-if="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
   </mu-dialog>
 </template>
 <script type="text/javascript">

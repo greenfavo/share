@@ -5,6 +5,7 @@
       <mu-menu-item title="发现" href="#/explore"/>
       <mu-menu-item title="书架" href="#/shelf"/>
       <mu-menu-item title="我的" href="#/mine"/>
+      <mu-menu-item title="消息" href="#/notify"/>
     </mu-icon-menu>
   </mu-appbar>
 </template>

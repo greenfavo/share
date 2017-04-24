@@ -1,8 +1,9 @@
 <template>
   <div class="gridlist-demo-container">
     <mu-grid-list class="gridlist-demo" v-if="books.length>0">
-      <mu-grid-tile v-for="item in books" cols="1" rows="1.5">
-        <img :src="item.cover"  @click="openBottomSheet(item)" class="cover" />
+      <mu-grid-tile v-for="(item, index) in books" cols="1" rows="1.5">
+        <img :src="item.cover"  class="cover"
+          @click="openBottomSheet(item);curIndex=index"/>
         <span slot="title">{{item.name}}</span>
         <span slot="subTitle" v-if="type==='private'">{{item.author}}</span>
         <span slot="subTitle" v-else>应还日期:{{item.date|dateFormat}}</span>
@@ -15,8 +16,10 @@
           操作
         </mu-sub-header>
         <mu-list-item title="查看详情" :to="`/book/${curId}`" />
-        <mu-list-item title="删除" v-if="type==='private'"/>
-        <mu-list-item title="还书" v-if="type==='borrow'"/>
+        <mu-list-item title="删除"
+          @click="handleDelete"
+          v-if="type==='private' && isLoginUer"/>
+        <mu-list-item title="还书" v-if="type==='borrow'" @click="returnBook"/>
       </mu-list>
     </mu-bottom-sheet>
   </div>
@@ -24,17 +27,27 @@
 
 <script>
 import { dateFormat } from '../utils'
+import api from '../api'
 
 export default {
   data () {
     return {
       bottomSheet: false,
-      curId: ''
+      curId: '',
+      curIndex: 0
     }
   },
   props: {
     type: String,
     books: Array
+  },
+  computed: {
+    isLoginUer () {
+      if (this.$route.params.id) {
+        return false
+      }
+      return true
+    }
   },
   methods: {
     closeBottomSheet () {
@@ -43,6 +56,38 @@ export default {
     openBottomSheet (item) {
       this.bottomSheet = true
       this.curId = item['_id']
+    },
+    handleDelete () {
+      api.deleteBook(this.curId).then(res => {
+        res = res.body
+        if (res.result === 'ok') {
+          this.$msg('success', '删除成功')
+          this.books.splice(this.curIndex, 1)
+        } else {
+          this.$msg('error', res.data)
+        }
+      }, (error) => {
+        this.$msg('error', error.body.data)
+      })
+    },
+    // 还书处理
+    returnBook () {
+      let bookInfo = this.books[this.curIndex]
+      let opts = {
+        receiverId: bookInfo.owerId,
+        type: '还书',
+        bookId: bookInfo['_id']
+      }
+      api.sendMessage(opts).then(res => {
+        res = res.body
+        if (res.result === 'ok') {
+          this.$msg('success', '你的还书申请已发送给图书主人')
+        } else {
+          this.$msg('error', res.data)
+        }
+      }, (error) => {
+        this.$msg('error', error.body.data)
+      })
     }
   },
   filters: {

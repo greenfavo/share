@@ -76,5 +76,13 @@ export default {
     return Vue.http.post(`${API}/message/process`, {
       bookId, organizerId, receiverId, type, date, reply
     })
+  },
+  // 删除图书
+  deleteBook (bookId) {
+    return Vue.http.delete(`${API}/book/${bookId}`)
+  },
+  // 搜索图书
+  searchBook (keyword) {
+    return Vue.http.get(`${API}/books/${keyword}`)
   }
 }
