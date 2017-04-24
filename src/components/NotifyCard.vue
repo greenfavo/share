@@ -9,9 +9,9 @@
         <img :src="info.book.cover" class="cover" />
       </mu-card-media>
     </mu-card>
-    <mu-raised-button v-if="showBtns" slot="actions" @click="close('false')"  label="拒绝"/>
-    <mu-raised-button v-if="showBtns" slot="actions" primary @click="close('true')" label="同意"/>
-    <mu-raised-button v-if="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
+    <mu-raised-button v-show="showBtns" slot="actions" @click="close('false')"  :label="info.type==='借阅'? '拒绝': '没还'"/>
+    <mu-raised-button v-show="showBtns" slot="actions" primary @click="close('true')" :label="info.type=='借阅'? '同意':'已还'"/>
+    <mu-raised-button v-show="!showBtns" slot="actions" primary @click="close('false')" label="确定"/>
   </mu-dialog>
 </template>
 <script type="text/javascript">
@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     showBtns () { // 显示两个按钮
+      console.log('info.type=', this.info.type)
       if (this.info.type !== '借阅申请' || this.info.type !== '还书申请') {
         return true
       }
@@ -38,6 +39,11 @@ export default {
   },
   methods: {
     close (reply) {
+      console.log('reply= ', reply)
+      if (reply !== 'true' || reply !== 'false') {
+        this.$emit('close', {reply: ''})
+        return
+      }
       let opts = {
         bookId: this.info.bookId,
         organizerId: this.info.organizerId,
@@ -45,11 +51,6 @@ export default {
         type: this.info.type,
         date: this.info.date,
         reply
-      }
-      console.log('reply= ', reply)
-      if (reply !== 'true' || reply !== 'false') {
-        this.$emit('close', {reply: ''})
-        return
       }
       api.handleMessage(opts).then(res => {
         res = res.body
