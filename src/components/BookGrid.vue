@@ -1,16 +1,17 @@
 <template>
-  <div class="cardList">
-    <div
+  <div class="books-wrap">
+    <div class="book"
+      v-for="(item, index) in books"
+      :style="`backgroundImage:url(${item.cover})`"
       v-if="books.length>0"
-      v-for="(item, index) in books" class="card">
-      <img :src="item.cover"  @click="openBottomSheet(item)"/>
-      <div class="desc">
-        <p class="title">{{item.name}}</p>
-        <p class="subTitle">
-          <span>{{item.author}}</span><br/>
-          <span v-if="type!=='private'">应还日期:{{item.date|dateFormat}}</span>
+      @click="openBottomSheet(item)">
+      <footer class="book-foot">
+        <h1 class="book-name">{{item.name}}</h1>
+        <p class="book-author">{{item.author}}</p>
+        <p class="book-date" v-if="type!=='private'">
+          应还日期:{{item.date|dateFormat}}
         </p>
-      </div>
+      </footer>
     </div>
     <p v-else>暂无图书</p>
     <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
@@ -99,16 +100,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.cardList{
+<style>
+/*.cardList{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: stretch;
 }
 .card {
   position: relative;
   margin-bottom: 5px;
+  margin-right: 5px;
 }
 .desc {
   position: relative;
@@ -124,5 +125,5 @@ export default {
   font-size: 1pt;
   margin-top: -11px;
   color: #b6a9a9;
-}
+}*/
 </style>
