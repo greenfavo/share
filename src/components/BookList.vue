@@ -1,19 +1,19 @@
 <template>
   <div>
     <mu-circular-progress :size="40"  v-if="loading" />
-    <section  v-for="item in books">
-      <router-link :to="`/book/${item['_id']}`" class="bookSec" tag="div">
-        <img :src="item.cover" class="cover" />
-        <ul class="mL20 desc">
-          <li><b>{{item.name}}</b></li>
-          <li class="light">{{item.author}}</li>
-          <li class="light">{{item.summary|sliceWord(55)}}</li>
-          <li class="location">
-            <mu-icon value="location_on" />{{item.area}}
-          </li>
-        </ul>
-      </router-link>
-    </section>
+    <router-link class="bookSec" tag="section"
+      v-for="item in books"
+      :to="`/book/${item['_id']}`" >
+      <img :src="item.cover" class="cover" />
+      <ul class="mL20 desc">
+        <li><b>{{item.name}}</b></li>
+        <li class="light">{{item.author}}</li>
+        <li class="light">{{item.summary|sliceWord(55)}}</li>
+        <li class="location">
+          <mu-icon value="location_on" />{{item.area}}
+        </li>
+      </ul>
+    </router-link>
     <p class="txtCenter pB20" @click="loadMore" v-show="showMore">加载更多</p>
     <p class="txtCenter pB20" v-show="!showMore">到底了</p>
   </div>

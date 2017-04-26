@@ -44,10 +44,14 @@ const mutations = {
   GET_BOOK_BY_ISBN (state, book) {
     state.book = book
   },
-  GET_ALL_BOOKS (state, res) {
+  GET_ALL_BOOKS (state, {res, timestamp}) {
     if (res.result === 'ok') {
       state.books.result = 'ok'
-      state.books.data = [...state.books.data, ...res.data]
+      if (timestamp) { // 加载更多
+        state.books.data = [...state.books.data, ...res.data]
+      } else {
+        state.books.data = res.data
+      }
     } else {
       state.books.result = res.data
     }
@@ -57,7 +61,6 @@ const mutations = {
   },
   SET_BOOK_INFO (state, book) {
     state.bookInfo = book
-    console.log('bookinfo: ', state.bookInfo)
   },
   GET_USER_BOOK (state, {book, type}) {
     type = type || 'private'
@@ -107,19 +110,18 @@ const actions = {
   getBooks ({ commit }, timestamp = '') {
     api.getBooks(timestamp).then((res) => {
       res = res.body
-      commit('GET_ALL_BOOKS', res)
+      commit('GET_ALL_BOOKS', {res, timestamp})
     })
   },
   getBookInfo ({ commit }, id) {
     api.getBookInfo(id).then((res) => {
       res = res.body
-      console.log('BookInfo-res ', JSON.stringify(res))
       if (res.result === 'ok') {
         commit('SET_BOOK_INFO', res.data)
       }
     })
   },
-  getUserBook ({ commit, state }, {userId, type = ''}) {
+  getUserBook ({ commit }, {userId, type = ''}) {
     api.getUserBook(userId, type).then((res) => {
       res = res.body
       if (res.result === 'ok') {

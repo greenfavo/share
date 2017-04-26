@@ -40,7 +40,7 @@ export default {
     if (!this.$store.state.userInfos[this.userId]) {
       this.$store.dispatch('getUserInfo', this.userId)
     }
-    this.$store.dispatch('getUserBook', this.userId)
+    this.$store.dispatch('getUserBook', {userId: this.userId})
   }
 }
 </script>

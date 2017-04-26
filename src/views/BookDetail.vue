@@ -70,7 +70,6 @@ export default {
   computed: {
     bookInfo () {
       let book = this.$store.state.bookInfo || {}
-      console.log('book-detail ', book)
       if (book) {
         this.$store.commit('SET_BACK_TITLE', book.name)
       }
@@ -90,6 +89,10 @@ export default {
   },
   methods: {
     handleBorrow () {
+      if (!this.$store.state.vertify || !getCookie('verify')) {
+        this.$router.push('/vertify')
+        return
+      }
       this.disabled = true
       let opts = {
         receiverId: this.bookInfo.ownerId,
