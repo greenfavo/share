@@ -15,7 +15,7 @@
         {{item.content}}
       </span>
     </mu-list-item>
-    <mu-list-item v-if="comments.length === 0">暂无评论</mu-list-item>
+    <mu-list-item v-if="comments && comments.length === 0">暂无评论</mu-list-item>
   </mu-list>
 </template>
 
@@ -30,7 +30,10 @@ export default {
     }
   },
   props: {
-    comments: Array
+    comments: {
+      type: Array,
+      default: []
+    }
   },
   computed: {
     loginUserAvatar () {
