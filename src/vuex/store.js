@@ -18,7 +18,7 @@ const state = {
     result: 'ok',
     data: []
   },
-  bookInfos: {}, // 图书详情信息
+  bookInfo: {}, // 图书详情信息
   userBook: {},
   messages: [],
   searchBooks: []
@@ -55,9 +55,9 @@ const mutations = {
   SET_VERTIFY (state, isVertify) {
     state.vertify = isVertify
   },
-  SET_BOOK_INFOS (state, book) {
-    Vue.set(state.bookInfos, book['_id'], book)
-    console.log('bookinfos: ', state.bookinfos)
+  SET_BOOK_INFO (state, book) {
+    state.bookInfo = book
+    console.log('bookinfo: ', state.bookInfo)
   },
   GET_USER_BOOK (state, {book, type}) {
     type = type || 'private'
@@ -115,9 +115,8 @@ const actions = {
       res = res.body
       console.log('BookInfo-res ', JSON.stringify(res))
       if (res.result === 'ok') {
-        commit('SET_BOOK_INFOS', res.data)
+        commit('SET_BOOK_INFO', res.data)
       }
-      console.log('res.data', res.data)
     })
   },
   getUserBook ({ commit, state }, {userId, type = ''}) {
