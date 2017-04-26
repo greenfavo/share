@@ -6,7 +6,7 @@
         <ul class="mL20">
           <li>书名:{{bookInfo.name}}</li>
           <li>作者:{{bookInfo.author}}</li>
-          <li v-if="bookInfo.translator">译者: {{bookInfo.translator}}</li>
+          <li v-show="bookInfo.translator">译者: {{bookInfo.translator}}</li>
           <li>ISBN:{{bookInfo.ISBN}}</li>
           <li>出版社: {{bookInfo.publish}}</li>
           <li >
@@ -26,13 +26,13 @@
       <div v-show="showAll">
         {{bookInfo.summary}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary && bookInfo.summary.length>65"
+          v-show="bookInfo.summary && bookInfo.summary.length>65"
           @click="showAll=!showAll" />
       </div>
       <div v-show="!showAll">
         {{bookInfo.summary|sliceWord(65)}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary && bookInfo.summary.length>65"
+          v-show="bookInfo.summary && bookInfo.summary.length>65"
           @click="showAll=!showAll" />
       </div>
       <br/>
@@ -41,7 +41,7 @@
         @click="handleBorrow"
         :disabled="disabled"/>
     </div>
-    <comment-list class="comment" :comments="bookInfo.comments && bookInfo.comments.reverse()" ></comment-list>
+    <comment-list class="comment" :comments="comments" ></comment-list>
   </div>
 </template>
 
@@ -78,6 +78,10 @@ export default {
     },
     isOwner () {
       return this.bookInfo.ownerId === getCookie('userId')
+    },
+    comments () {
+      let comments = this.bookInfo && this.bookInfo.comments || []
+      return comments.reverse()
     }
   },
   mounted () {

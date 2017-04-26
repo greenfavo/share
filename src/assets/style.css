@@ -30,13 +30,13 @@ li{
 }
 .cover {
   width: 110px;
-  /*height: 150px;*/
+  height: 100%;
   background-color: gray;
   background-size: cover;
 }
-.desc {
+/*.desc {
   width: calc(100% - 110px - 20px)
-}
+}*/
 a {
   cursor: pointer;
 }
