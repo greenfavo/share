@@ -70,10 +70,11 @@ export default {
   computed: {
     bookInfo () {
       let book = this.$store.state.bookInfos && this.$store.state.bookInfos[this.id] || {}
+      console.log('book-detial ', book)
       if (book) {
         this.$store.commit('SET_BACK_TITLE', book.name)
-        return book
       }
+      return book
     },
     isOwner () {
       return this.bookInfo.ownerId === getCookie('userId')

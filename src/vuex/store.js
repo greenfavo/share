@@ -113,10 +113,9 @@ const actions = {
   getBookInfo ({ commit }, id) {
     api.getBookInfo(id).then((res) => {
       res = res.body
+      console.log('BookInfo-res ', res)
       if (res.result === 'ok') {
         commit('SET_BOOK_INFOS', res.data)
-      } else {
-        throw new Error('fail')
       }
     })
   },
