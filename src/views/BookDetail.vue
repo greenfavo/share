@@ -41,7 +41,7 @@
         @click="handleBorrow"
         :disabled="disabled"/>
     </div>
-    <comment-list class="comment" :comments="bookInfo.comments.reverse()" ></comment-list>
+    <comment-list class="comment" :comments="bookInfo.comments && bookInfo.comments.reverse()" ></comment-list>
   </div>
 </template>
 
