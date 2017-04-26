@@ -30,9 +30,12 @@ li{
 }
 .cover {
   width: 110px;
-  height: 150px;
+  /*height: 150px;*/
   background-color: gray;
   background-size: cover;
+}
+.desc {
+  width: calc(100% - 110px - 20px)
 }
 a {
   cursor: pointer;

@@ -3,10 +3,8 @@
     <mu-circular-progress :size="40"  v-if="loading" />
     <section  v-for="item in books">
       <router-link :to="`/book/${item['_id']}`" class="bookSec" tag="div">
-        <!-- <img :src="item.cover" class="cover" /> -->
-        <div class="cover"
-          :style="`backgroundImage:url(${item.cover})`"></div>
-        <ul class="mL20">
+        <img :src="item.cover" class="cover" />
+        <ul class="mL20 desc">
           <li><b>{{item.name}}</b></li>
           <li class="light">{{item.author}}</li>
           <li class="light">{{item.summary|sliceWord(55)}}</li>

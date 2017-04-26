@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     bookInfo () {
-      let book = this.$store.state.bookInfos && this.$store.state.bookInfos[this.id]
+      let book = this.$store.state.bookInfos && this.$store.state.bookInfos[this.id] || {}
       if (book) {
         this.$store.commit('SET_BACK_TITLE', book.name)
         return book

@@ -8,7 +8,7 @@ const state = {
   isShowNavBar: true, // 是否显示导航栏
   backTitle: '返回', // 后退按钮标题
   userInfos: {},
-  vertify: true,
+  vertify: false,
   wechatConfig: {
     debug: false,
     jsApiList: ['scanQRCode']

@@ -13,7 +13,7 @@
         </p>
       </footer>
     </div>
-    <p v-else>暂无图书</p>
+    <p v-if="books.length===0">暂无图书</p>
     <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
       <mu-list @itemClick="closeBottomSheet">
         <mu-sub-header>
