@@ -29,7 +29,7 @@ export default {
       return getCookie('userId') || ''
     },
     userInfo () {
-      return this.$store.state.userInfos && this.$store.state.userInfos[this.userId]
+      return this.$store.state.userInfos && this.$store.state.userInfos[this.userId] || {}
     }
   },
   mounted () {

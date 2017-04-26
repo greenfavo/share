@@ -1,7 +1,9 @@
 // 字符截断加省略号
 export function sliceWord (str, num) {
-  str = str.slice(0, num) + '...'
-  return str
+  if (str) {
+    str = str.slice(0, num) + '...'
+  }
+  return str || ''
 }
 // 日期格式化
 export function dateFormat (str) {
@@ -27,5 +29,5 @@ export function getCookie (name) {
   let valueStart = nameEnd + 1
   let valueEnd = cookie.indexOf(';', valueStart)
   let value = cookie.slice(valueStart, valueEnd)
-  return value
+  return value || ''
 }

@@ -30,7 +30,7 @@ export default {
       return this.$store.state.messages || []
     },
     curMesssage () {
-      return this.messages[this.curIndex]
+      return this.messages[this.curIndex] || {}
     }
   },
   filters: {

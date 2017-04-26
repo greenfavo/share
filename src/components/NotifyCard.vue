@@ -23,11 +23,13 @@ export default {
   props: {
     dialog: {
       type: Boolean,
-      required: true
+      required: true,
+      default: false
     },
     info: {
       type: Object,
-      required: true
+      required: true,
+      default: {}
     }
   },
   computed: {

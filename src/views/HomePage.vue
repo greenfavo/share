@@ -25,7 +25,7 @@ export default {
       return this.$route.params.id
     },
     userInfo () {
-      let userInfo = this.$store.state.userInfos && this.$store.state.userInfos[this.userId]
+      let userInfo = this.$store.state.userInfos && this.$store.state.userInfos[this.userId] || {}
       if (userInfo) {
         this.$store.commit('SET_BACK_TITLE', userInfo.nickname)
       }
