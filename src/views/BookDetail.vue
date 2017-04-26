@@ -32,7 +32,7 @@
       <div v-show="!showAll">
         {{bookInfo.summary|sliceWord(65)}}
         <mu-flat-button :label="showAll? '收起' : '展开'" primary
-          v-if="bookInfo.summary.length>65"
+          v-if="bookInfo.summary && bookInfo.summary.length>65"
           @click="showAll=!showAll" />
       </div>
       <br/>

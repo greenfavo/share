@@ -15,7 +15,7 @@
       </router-link>
     </section>
     <p class="txtCenter pB20" @click="loadMore" v-show="showMore">加载更多</p>
-    <p class="txtCenter pB20" v-show="!showMore">没有更多图书了</p>
+    <p class="txtCenter pB20" v-show="!showMore">到底了</p>
   </div>
 </template>
 
@@ -32,10 +32,11 @@ export default {
   computed: {
     books () {
       let res = this.$store.state.books || {}
-      if (res.result === '没有更多图书了') {
+      let books = this.$store.state.books && this.$store.state.books.data || []
+      if (res.result === '没有更多图书了' || books.length < 10) {
         this.showMore = false
       }
-      return this.$store.state.books && this.$store.state.books.data || []
+      return books
     }
   },
   mounted () {
