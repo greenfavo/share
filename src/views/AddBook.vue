@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <mu-toast v-if="toast" message="添加失败，请重试" @close="hideToast"/>
     <mu-text-field label="ISBN" labelFloat fullWidth v-model="ISBN" required/>
     <mu-text-field label="书名" labelFloat fullWidth v-model="name"/>
     <mu-text-field label="作者" labelFloat fullWidth v-model="author"/>
@@ -36,7 +35,6 @@ export default {
         '南湖园', '南书院', '美院圆楼', '北区公寓篮球场', '教工食堂'
       ],
       disabled: false,
-      toast: false,
       ISBN: '',
       name: '',
       author: '',
@@ -93,22 +91,15 @@ export default {
         if (res.body.result === 'ok') {
           this.$router.push('shelf')
         } else {
-          this.showToast()
+          this.$msg('error', res.data || '添加失败，请重试')
           console.log(res.body.data)
         }
+      }, error => {
+        this.$msg('error', error.body.data || '添加失败，请重试')
       })
     },
     handleUpload (url) {
       this.cover = url
-    },
-    showToast () {
-      this.toast = true
-      if (this.toastTimer) clearTimeout(this.toastTimer)
-      this.toastTimer = setTimeout(() => { this.toast = false }, 2000)
-    },
-    hideToast () {
-      this.toast = false
-      if (this.toastTimer) clearTimeout(this.toastTimer)
     }
   }
 }

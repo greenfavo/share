@@ -30,7 +30,7 @@ li{
 }
 .cover {
   width: 110px;
-  height: 100%;
+  height: 150px;
   background-color: gray;
   background-size: cover;
 }
@@ -220,5 +220,5 @@ li {
   color: #ececec;
 }
 .book-date {
-  white-space: pre-wrap;
+  white-space: normal;
 }

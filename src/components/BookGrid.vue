@@ -7,9 +7,9 @@
       @click="openBottomSheet(item)">
       <footer class="book-foot">
         <h1 class="book-name">{{item.name}}</h1>
-        <p class="book-author">{{item.author}}</p>
+        <p class="book-author" v-if="type==='private'">{{item.author}}</p>
         <p class="book-date" v-if="type!=='private'">
-          应还日期:{{item.date|dateFormat}}
+          应还日期:{{returnDate(item.date)|dateFormat}}
         </p>
       </footer>
     </div>
@@ -92,6 +92,10 @@ export default {
       }, (error) => {
         this.$msg('error', error.body.data)
       })
+    },
+    returnDate (date) {
+      let d = new Date(date)
+      return d.setDate(d.getDate() + 7)
     }
   },
   filters: {
