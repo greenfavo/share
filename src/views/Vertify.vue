@@ -13,7 +13,6 @@
 </template>
 <script>
 import api from '../api'
-import { getCookie } from '../utils'
 
 export default {
   mounted () {
@@ -25,7 +24,7 @@ export default {
       username: '',
       password: '',
       disabled: false,
-      isVertify: getCookie('verify') || this.$store.state.vertify
+      isVertify: this.$store.state.vertify
     }
   },
   methods: {
@@ -45,11 +44,11 @@ export default {
           this.isVertify = true
           this.$store.commit('SET_VERTIFY', true)
         } else {
-          this.$msg('error', res.data)
+          this.$msg('error', '用户名或密码错误')
         }
       }, (error) => {
         this.disabled = false
-        this.$msg('error', error.body.data || '操作失败')
+        this.$msg('error', error.body.data || '校园认证失败')
       })
     },
     cancelVertify () {

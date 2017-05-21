@@ -54,7 +54,7 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  let isVerify = getCookie('verify') || store.state.vertify
+  let isVerify = store.state.vertify
   if (to.matched.some(record => record.meta.vertify)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.

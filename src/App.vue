@@ -13,6 +13,7 @@ import BackNav from './components/BackNav'
 import BottomBar from './components/BottomBar'
 import './assets/style.css'
 import { mapState } from 'vuex'
+import { getCookie } from '../utils'
 
 export default {
   name: 'app',
@@ -23,6 +24,9 @@ export default {
   },
   computed: mapState({
     isShowNavBar: state => state.isShowNavBar
-  })
+  }),
+  mounted () {
+    this.$store.commit('SET_VERTIFY', getCookie('verify'))
+  }
 }
 </script>
