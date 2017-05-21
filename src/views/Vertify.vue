@@ -41,8 +41,10 @@ export default {
         this.disabled = false
         res = res.body
         if (res.result === 'ok') {
+          let redirect = this.$route.query.redirect
           this.isVertify = true
           this.$store.commit('SET_VERTIFY', true)
+          this.$router.push(redirect)
         } else {
           this.$msg('error', '用户名或密码错误')
         }

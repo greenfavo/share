@@ -34,8 +34,7 @@ const router = new Router({
     },
     {
       path: '/notify',
-      component: resolve => require(['../views/Notify'], resolve),
-      meta: { vertify: true }
+      component: resolve => require(['../views/Notify'], resolve)
     },
     {
       path: '/addBook',
