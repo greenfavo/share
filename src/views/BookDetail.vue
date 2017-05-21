@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     handleBorrow () {
-      if (!this.$store.state.vertify || !getCookie('verify')) {
+      if (!this.$store.state.vertify) {
         this.$router.push('/vertify')
         return
       }
