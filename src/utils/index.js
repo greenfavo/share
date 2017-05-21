@@ -25,9 +25,18 @@ export function dateFormat (str) {
 export function getCookie (name) {
   let cookie = document.cookie
   let nameStart = cookie.indexOf(name + '=')
+  if (!~nameStart) {
+    return ''
+  }
   let nameEnd = name.length + nameStart
   let valueStart = nameEnd + 1
   let valueEnd = cookie.indexOf(';', valueStart)
-  let value = cookie.slice(valueStart, valueEnd)
-  return value || ''
+  let value
+  if (!~valueEnd) {
+    value = cookie.slice(valueStart)
+  } else {
+    value = cookie.slice(valueStart, valueEnd)
+  }
+  return value
 }
+
