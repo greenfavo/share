@@ -13,7 +13,7 @@ import BackNav from './components/BackNav'
 import BottomBar from './components/BottomBar'
 import './assets/style.css'
 import { mapState } from 'vuex'
-import { getCookie } from '../utils'
+import { getCookie } from './utils'
 
 export default {
   name: 'app',

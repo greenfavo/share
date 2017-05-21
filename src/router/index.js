@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { getCookie } from '../utils'
 import store from '../vuex/store'
 
 Vue.use(Router)
